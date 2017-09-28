@@ -35,7 +35,7 @@
   },
   "resources": [
     {
-      "name": "Create-Virtual-Network",
+      "name": "Create-vNet-With-Default-Dns",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
