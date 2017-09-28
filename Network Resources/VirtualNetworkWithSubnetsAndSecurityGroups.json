@@ -24,7 +24,7 @@
     },
     "vNetDnsServers": {
       "type": "array",
-      "defaultValue": null,
+      "defaultValue": [ null ],
       "metadata": {
         "description": "An array of DNS Servers to be used for the Virtual Network. Defaults to the Azure Defaults"
       }
