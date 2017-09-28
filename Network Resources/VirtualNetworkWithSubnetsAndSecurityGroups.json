@@ -21,6 +21,13 @@
       "metadata": {
         "description": "An array of subnets, including network security group references, to be created in the virtual network."
       }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
     }
   },
   "variables": {
@@ -31,6 +38,7 @@
       "name": "[parameters('vNetName')]",
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2016-10-01",
+      "location": "[parameters('deploymentLocation')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
