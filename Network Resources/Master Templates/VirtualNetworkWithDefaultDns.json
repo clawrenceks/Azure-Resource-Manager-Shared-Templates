@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vNetName": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 64,
+      "metadata": {
+        "description": "The name of the virtual network to create."
+      }
+    },
+    "vNetAddressSpaces": {
+      "type": "array",
+      "metadata": {
+        "description": "The address spaces for the virtual network."
+      }
+    },
+    "vNetSubnets": {
+      "type": "array",
+      "metadata": {
+        "description": "An array of subnets, including network security group references, to be created in the virtual network."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+
+  },
+  "resources": [
+    {
+      "name": "Create-Virtual-Network",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Network%20Resources/Master%20Templates/VirtualNetworkMaster.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "vNetName": {
+            "value": "[parameters('vNetName')]"
+          },
+          "vNetAddressSpaces": {
+            "value": "[parameters('vNetAddressSpace')]"
+          },
+          "vNetSubnets": {
+            "value": "[parameters('vNetSubnets')]"
+          },
+          "deploymentLocation": {
+            "value": "[parameters('deploymentLocation')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
