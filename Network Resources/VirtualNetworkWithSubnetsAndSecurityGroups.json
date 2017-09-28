@@ -19,7 +19,6 @@
     },
     "vNetSubnets": {
       "type": "array",
-      "minLength": 1
       "metadata": {
         "description": "An array of subnets, including network security group references, to be created in the virtual network."
       }
