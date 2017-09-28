@@ -41,9 +41,7 @@
       "location": "[parameters('deploymentLocation')]",
       "properties": {
         "addressSpace": {
-          "addressPrefixes": [
-            "parameters('vNetAddressSpaces')"
-          ]
+          "addressPrefixes": "[parameters('vNetAddressSpaces')]"
         },
         "subnets": "[parameters('vNetSubnets')]",
         "dhcpOptions": {
