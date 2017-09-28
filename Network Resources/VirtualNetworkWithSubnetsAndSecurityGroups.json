@@ -43,10 +43,7 @@
         "addressSpace": {
           "addressPrefixes": "[parameters('vNetAddressSpaces')]"
         },
-        "subnets": "[parameters('vNetSubnets')]",
-        "dhcpOptions": {
-          "dnsServers": [""]
-        }
+        "subnets": "[parameters('vNetSubnets')]"
       }
     }
   ],
