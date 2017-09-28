@@ -45,7 +45,7 @@
         },
         "subnets": "[parameters('vNetSubnets')]",
         "dhcpOptions": {
-          "dnsServers": [ "8.8.8.8" ]
+          "dnsServers": []
         }
       }
     }
