@@ -16,7 +16,7 @@
         "description": "The address spaces for the virtual network."
       }
     },
-    "vNetSubnets": {
+    "vNetSubnets1": {
       "type": "array",
       "metadata": {
         "description": "An array of subnets, including network security group references, to be created in the virtual network."
