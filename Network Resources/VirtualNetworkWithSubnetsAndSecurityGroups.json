@@ -24,9 +24,8 @@
     },
     "vNetDnsServers": {
       "type": "array",
-      "defaultValue": [ null ],
       "metadata": {
-        "description": "An array of DNS Servers to be used for the Virtual Network. Defaults to the Azure Defaults"
+        "description": "An array of DNS Servers to be used for the Virtual Network. Pass null to use the Azure Defaults"
       }
     },
     "deploymentLocation": {
@@ -52,7 +51,7 @@
         },
         "subnets": "[parameters('vNetSubnets')]",
         "dhcpOptions": {
-          "dnsServers": "[parameters('vNetDnsServers')]"
+          "dnsServers": null
         }
       }
     }
