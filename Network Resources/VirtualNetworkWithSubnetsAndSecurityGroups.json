@@ -50,7 +50,9 @@
           "addressPrefixes": "[parameters('vNetAddressSpaces')]"
         },
         "subnets": "[parameters('vNetSubnets')]",
-        "dhcpOptions": [ null ]
+        "dhcpOptions": {
+          "dnsServers": [ "8.8.8.8" ]
+        }
       }
     }
   ],
