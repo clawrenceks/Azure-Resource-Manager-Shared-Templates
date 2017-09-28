@@ -22,13 +22,6 @@
         "description": "An array of subnets, including network security group references, to be created in the virtual network."
       }
     },
-    "vNetDnsServers": {
-      "type": "array",
-      "defaltValue": ["9.9.9.9"],
-      "metadata": {
-        "description": "An array of DNS Servers to be used for the Virtual Network. Pass null to use the Azure Defaults"
-      }
-    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
