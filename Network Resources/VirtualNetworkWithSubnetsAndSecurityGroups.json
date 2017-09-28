@@ -23,8 +23,8 @@
       }
     },
     "vNetDnsServers": {
-      "type": "string",
-      "defaultValue": "9.9.9.9",
+      "type": "array",
+      "defaultValue": null,
       "metadata": {
         "description": "An array of DNS Servers to be used for the Virtual Network. Defaults to the Azure Defaults"
       }
@@ -52,7 +52,7 @@
         },
         "subnets": "[parameters('vNetSubnets')]",
         "dhcpOptions": {
-          "dnsServers": null
+          "dnsServers": "[parameters('vNetDnsServers')]"
         }
       }
     }
