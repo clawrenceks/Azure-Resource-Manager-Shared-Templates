@@ -51,7 +51,7 @@
             "value": "[parameters('vNetName')]"
           },
           "vNetAddressSpaces": {
-            "value": "[parameters('vNetAddressSpace')]"
+            "value": "[parameters('vNetAddressSpaces')]"
           },
           "vNetSubnets": {
             "value": "[parameters('vNetSubnets')]"
