@@ -23,12 +23,12 @@
     }
   },
   "variables": {
-    "apiVersion": "2017-03-01"
+    "nsgResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('nsgName'))]"
   },
   "resources": [
     {
       "type": "Microsoft.Network/networkSecurityGroups",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-03-01",
       "name": "[parameters('nsgName')]",
       "location": "[parameters('deploymentLocation')]",
       "properties": {
@@ -37,6 +37,9 @@
     }
   ],
   "outputs": {
-
+    "nsgResourceId": {
+      "type": "string",
+      "value": "[variables('nsgResourceId')]"
+    }
   }
 }
