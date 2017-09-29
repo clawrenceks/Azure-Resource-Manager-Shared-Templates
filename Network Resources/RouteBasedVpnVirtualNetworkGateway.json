@@ -28,7 +28,30 @@
     },
     "gatewayPublicIpResourceId": {
       "type": "string",
-      "description": "The resource ID of the Public IP to be used by the Vpn Gateway"
+      "metadata": {
+        "description": "The resource ID of the Public IP to be used by the Vpn Gateway"
+      }
+    },
+    "gatewayP2SClientSubnetAddressRange": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of subnet addresses for Point-to-Site clients. This parameters is only required if wish to allow Point-to-Site connectivity."
+      }
+    },
+    "vpnClientRootCertificates": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of Client Root Certificate objects that should be used for Point-to-Site client authentication. This parameters is only required if wish to allow Point-to-Site connectivity."
+      }
+    },
+    "vpnClientRevokedCertificates": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of Revoked Vpn Client Certificates that should be used as part of Point-to-Site client authentication. This parameters is only required if wish to allow Point-to-Site connectivity."
+      }
     },
     "deploymentLocation": {
       "type": "string",
@@ -70,7 +93,14 @@
         },
         "gatewayType": "Vpn",
         "vpnType": "RouteBased",
-        "enableBgp": "false"
+        "enableBgp": "false",
+        "vpnClientConfiguration": {
+          "vpnClientAddressPool": {
+            "addressPrefixes": "[parameters('gatewayP2SClientSubnetAddressRange')]"
+          },
+          "vpnClientRootCertificates": "[parameters('vpnClientRootCertificates')]",
+          "vpnClientRevokedCertificates": "[parameters('vpnClientRevokedCertificates')]"
+        }
       }
     }    
   ],
