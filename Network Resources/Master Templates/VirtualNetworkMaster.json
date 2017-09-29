@@ -38,7 +38,7 @@
     }
   },
   "variables": {
-
+    "vNetResouceId": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vNetName'))]"
   },
   "resources": [
     {
@@ -56,6 +56,9 @@
     }
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('vNetResouceId')]"
+    }
   }
 }
