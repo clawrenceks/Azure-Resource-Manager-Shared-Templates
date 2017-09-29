@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "nsgName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the network security group to be created"
+      }
+    },
+    "nsgRules": {
+      "type": "array",
+      "metatdata": {
+        "description": "An array of network security group rule objects to be added to the network security group"
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "apiVersion": "2017-03-01"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "[variables('apiVersion')]",
+      "name": "[parameters('nsgName')]",
+      "location": "[parameters('deploymentLocation')]",
+      "properties": {
+        "securityRules": "[parameters('nsgRules')]"
+      }
+    }
+  ],
+  "outputs": {
+
+  }
+}
