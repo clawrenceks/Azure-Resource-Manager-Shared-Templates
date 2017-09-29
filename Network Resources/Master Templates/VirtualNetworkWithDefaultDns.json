@@ -37,7 +37,7 @@
     }
   },
   "variables": {
-    "vNetResourceId": "[reference('Microsoft.Resources/deployments','Create-vNet-With-Default-Dns')]"
+
   },
   "resources": [
     {
@@ -72,7 +72,7 @@
   "outputs": {
     "resourceId": {
       "type": "string",
-      "value": "[variables('vNetResourceId').outputs.resourceId.value]"
+      "value": "[reference('Create-vNet-With-Default-Dns').outputs.resourceId.value]"
     }
   }
 }

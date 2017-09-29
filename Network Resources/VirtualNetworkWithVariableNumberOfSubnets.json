@@ -50,7 +50,6 @@
   },
   "variables": {
     "vNetMasterTemplateUrl": "[concat('https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Network%20Resources/Master%20Templates/VirtualNetworkWith',parameters('vNetDnsServerOption'),'Dns.json')]",
-    "vNetResourceId": "[reference('Microsoft.Resources/deployments','Create-vNet-With-Variable-Number-Of-Subnets')]"
   },
   "resources": [
     {
@@ -88,7 +87,7 @@
   "outputs": {
     "resourceId": {
       "type": "string",
-      "value": "[variables('vNetResourceId').outputs.resourceId.value]"
+      "value": "[reference('Create-vNet-With-Variable-Number-Of-Subnets').outputs.resourceId.value]"
     }
   }
 }
