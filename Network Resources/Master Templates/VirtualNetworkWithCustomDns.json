@@ -27,7 +27,6 @@
       "metadata": {
         "description": "The list of DNS servers to be used by the virtual network"
       }
-
     },
     "deploymentLocation": {
       "type": "string",

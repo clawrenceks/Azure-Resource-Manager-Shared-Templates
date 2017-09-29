@@ -22,6 +22,12 @@
         "description": "An array of subnets, including network security group references, to be created in the virtual network."
       }
     },
+    "vNetDnsServers": {
+      "type": "array",
+      "metadata": {
+        "description": "The parameter is not used by this template and is only here to satisfy the template hierarchy."
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
