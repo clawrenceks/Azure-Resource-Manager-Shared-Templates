@@ -84,7 +84,7 @@
                 "id": "[parameters('gatewayPublicIpResourceId')]"
               }
             },
-            "name": "[concat(parameters('virtualNetworkGatewayName','-ipconfig'))]"
+            "name": "[concat(parameters('virtualNetworkGatewayName'),'-ipconfig')]"
           }
         ],
         "sku": {
