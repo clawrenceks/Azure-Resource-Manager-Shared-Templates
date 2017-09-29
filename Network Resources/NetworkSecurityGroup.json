@@ -10,6 +10,7 @@
     },
     "nsgRules": {
       "type": "array",
+      "defaultValue": [],
       "metatdata": {
         "description": "An array of network security group rule objects to be added to the network security group"
       }
