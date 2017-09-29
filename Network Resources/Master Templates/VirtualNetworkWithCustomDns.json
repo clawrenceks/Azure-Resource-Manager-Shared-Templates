@@ -67,10 +67,11 @@
             "value": "[parameters('deploymentLocation')]"
           },
           "vNetDhcpOptions": {
-            "dhcpOptions": {
-              "dnsServers": "[parameters('vNetDnsServers')]"
+            "value": {              
+              "dhcpOptions": {
+                "dnsServers": "[parameters('vNetDnsServers')]"
+              }
             }
-          }
         }
       }
     }
