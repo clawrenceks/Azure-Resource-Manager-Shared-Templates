@@ -23,7 +23,7 @@
       }
     },
     "vNetDnsServerOption": {
-      "type": "array",
+      "type": "string",
       "defaultValue": "Default",
       "allowedValues": [
         "Default",
