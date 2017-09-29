@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "localGatewayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "The name of the local network gateway to create."
+      }
+    },
+    "localGatewayIpAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The public IP address of the local network gateway."
+      }
+    },
+    "localNetworkAddressSpaces": {
+      "type": "array",
+      "metadata": {
+        "description": "The local address spaces for the local network gateway, for example 192.168.3.0/24"
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+
+  },
+  "resources": [
+    {
+      "apiVersion": "2016-08-01",
+      "type": "Microsoft.Network/localNetworkGateways",
+      "name": "[parameters('localGatewayName')]",
+      "location": "[parameters('deploymentLocation')]",
+      "properties": {
+        "localNetworkAddressSpace": {
+          "addressPrefixes": "[parameters('localNetworkAddressSpaces')]"
+        },
+        "gatewayIpAddress": "[parameters('localGatewayIpAddress')]"
+      }
+    }
+  ],
+  "outputs": {
+
+  }
+}
