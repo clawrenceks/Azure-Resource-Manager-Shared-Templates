@@ -2,19 +2,24 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "nsgName": {
+    "ipAddressName": {
       "type": "string",
       "minLength": 1,
       "maxLength": 80,
       "metadata": {
-        "description": "The name of the network security group to be created"
+        "description": "The name of the IP Address to be created."
       }
     },
-    "nsgRules": {
-      "type": "array",
+    "ipAddressAllocationType": {
+      "type": "string",
+      "allowedValues": [
+        "Dynamic",
+        "Static"
+      ],
       "metadata": {
-        "description": "An array of network security group rule objects to be added to the network security group"
+        "description": "The allocation method for the IP Address, valid options are Dynamic or Static"
       }
+
     },
     "deploymentLocation": {
       "type": "string",
@@ -25,23 +30,23 @@
     }
   },
   "variables": {
-    "nsgResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('nsgName'))]"
+    "ipResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('ipAddressName'))]"
   },
   "resources": [
     {
-      "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2017-03-01",
-      "name": "[parameters('nsgName')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('ipAddressName')]",
       "location": "[parameters('deploymentLocation')]",
       "properties": {
-        "securityRules": "[parameters('nsgRules')]"
+        "publicIPAllocationMethod": "[parameters('ipAddressAllocationType')]"
       }
     }
   ],
   "outputs": {
-    "nsgResourceId": {
+    "resourceId": {
       "type": "string",
-      "value": "[variables('nsgResourceId')]"
+      "value": "[variables('ipResourceId')]"
     }
   }
 }
