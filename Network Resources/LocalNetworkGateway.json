@@ -31,7 +31,7 @@
     }
   },
   "variables": {
-
+    "resourceId": "[resourceId('Microsoft.Network/localNetworkGateways',parameters('localGatewayName'))]"
   },
   "resources": [
     {
@@ -48,6 +48,9 @@
     }
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('resourceId')]"
+    }
   }
 }

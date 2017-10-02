@@ -62,7 +62,7 @@
     }
   },
   "variables": {
-
+    "resourceId": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('virtualNetworkGatewayName'))]"
   },
   "resources": [
     {
@@ -105,6 +105,9 @@
     }    
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('resourceId')]"
+    }
   }
 }
