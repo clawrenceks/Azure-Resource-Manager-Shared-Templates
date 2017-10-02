@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "connectionName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "The name of the connection to be created."
+      }
+    },
+    "virtualNetworkGatewayResourceId": {
+      "type": "string",
+      "metadata": {
+        "description": "The resource ID of the virtual network gateway that the connection should be associated with."
+      }
+    },
+    "localNetworkGatewayResourceId": {
+      "type": "string",
+      "metadata": {
+        "description": "The resource ID of the local network gateway that the connection should be associated with."
+      }
+    },
+    "sharedKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The pre-shared key used to secure the connection."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-03-01",
+      "name": "[parameters('connectionName')]",
+      "type": "Microsoft.Network/connections",
+      "location": "[parameters('deploymentLocation')]",
+      "properties": {
+        "virtualNetworkGateway1": {
+          "id": "[parameters('virtualNetworkGatewayResourceId')]"
+        },
+        "localNetworkGateway2": {
+          "id": "[parameters('localNetworkGatewayResourceId')]"
+        },
+        "connectionType": "IPsec",
+        "routingWeight": 10,
+        "sharedKey": "[parameters('sharedKey')]"
+      }
+    }
+  ],
+  "outputs": {
+
+  }
+}
