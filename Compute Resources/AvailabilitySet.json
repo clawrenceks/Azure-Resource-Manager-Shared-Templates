@@ -28,14 +28,14 @@
     },
     "availabilitySetSku": {
       "type": "string",
-      "allowedValues": {
+      "allowedValues": [
         "Classic",
         "Aligned"
-      },
+      ],
       "metadata": {
         "description": "The Sku for the availability set. Use Aligned for managed disks and Classic for classic disks."
       }
-    }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
