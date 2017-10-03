@@ -1,0 +1,143 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualMachineScaleSetNamePrefix": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 61,
+      "metadata": {
+        "description": "The prefix for the virtual machine scale set name. Elements of the Resource Group ID will be added to this name to ensure uniqueness"
+      }
+    },
+    "virtualMachineSizeSku": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the virtual machines to use within the scale set, e.g. Standard_A1."
+      }
+    },
+    "virtualMachineScaleSetTier": {
+      "type": "string",
+      "defaultValue": "Standard",
+      "metadata": {
+        "description": "The tier for the virtual machine scale set."
+      }
+    },
+    "instanceCount": {
+      "type": "int",
+      "metadata": {
+        "description": "The number of virtual machines that should be created within the scale set."
+      }
+    },
+    "enableOverProvisioning": {
+      "type": "string",
+      "allowedValues": [
+        "true",
+        "false"
+      ],
+      "metadata": {
+        "description": "Specify whether overprovisioning should be used by the scale set. Valid values are true or false."
+      }
+    },
+    "upgradeMode": {
+      "type": "string",
+      "allowedValues": [
+        "Manual",
+        "Automatic"
+      ],
+      "metadata": {
+        "description": "The upgrade mode for the virtual machine scale set. Valid values are Manual and Automatic - more info can be seen at https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set"
+      }
+    },
+    "virtualMachineOperatingSystemOsDiskObject": {
+      "type": "object",
+      "metadata": {
+        "description": "The OsDisk object for the Operating System Disk to be used by the virtual machines in the scale set."
+      }
+    },
+    "virtualMachineOperatingSystemImageReference": {
+      "type": "object",
+      "metadata": {
+        "description": "The image reference object for the operating system image to be used by the virtual machines in the scale set."
+      }
+    },
+    "virtualMachineNamePrefix": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 13,
+      "metadata": {
+        "description": "The prefix to use for the name of the virtual machines in the scale set."
+      }
+    },
+    "virtualMachineAdminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "The username for the local administrator account to be created on the virtual machines in the scale set."
+      }
+    },
+    "virtualMachineAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the local administrator account to be created on the virtual machines in the scale set."
+      }
+    },
+    "virtualMachineNetworkInterfaceConfiguration": {
+      "type": "array",
+      "metadata": {
+        "description": "A Network Interface Configuration Array used to configure the network profile of all virtual machines in the scale set."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "virtualMachineScaleSetName": "[toLower(substring(concat(parameters('virtualMachineScaleSetNamePrefix'), uniqueString(resourceGroup().id)), 0, 9))]",
+    "resourceId": "[resourceId('Microsoft.Compute/virtualMachineScaleSets',variables('virtualMachineScaleSetName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      "name": "[variables('virtualMachineScaleSetName')]",
+      "location": "[parameters('deploymentLocation')]",
+      "apiVersion": "2017-04-01",
+      "dependsOn": [
+      ],
+      "sku": {
+        "name": "[parameters('virtualMachineSizeSku')]",
+        "tier": "[parameters('virtualMachineScaleSetTier')]",
+        "capacity": "[parameters('instanceCount')]"
+      },
+      "properties": {
+        "overprovision": "[parameters('enableOverProvisioning')]",
+        "upgradePolicy": {
+          "mode": "[parameters('upgradeMode')]"
+        },
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "osDisk": "[parameters('virtualMachineOperatingSystemOsDiskObject')]",
+            "imageReference": "[parameters('virtualMachineOperatingSystemImageReference')]"
+          },
+          "osProfile": {
+            "computerNamePrefix": "[parameters('virtualMachineNamePrefix')]",
+            "adminUsername": "[parameters('virtualMachineAdminUsername')]",
+            "adminPassword": "[parameters('virtualMachineAdminPassword')]"
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": "[parameters('virtualMachineScaleSetNamePrefix')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('resourceId')]"
+    }
+  }
+}
