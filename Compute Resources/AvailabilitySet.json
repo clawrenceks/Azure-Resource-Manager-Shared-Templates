@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "availabilitySetName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "The name of the availability set to be created."
+      }
+    },
+    "numberOfFaultDomains": {
+      "type": "int",
+      "minValue": 1,
+      "maxValue": 3,
+      "metadata": {
+        "description": "The number of fault domains for the availability set."
+      }
+    },
+    "numberOfUpdateDomains": {
+      "type": "int",
+      "minValue": 1,
+      "maxValue": 20,
+      "metadata": {
+        "description": "The number of update domains for the availability set."
+      }
+    },
+    "availabilitySetSku": {
+      "type": "string",
+      "allowedValues": {
+        "Classic",
+        "Aligned"
+      },
+      "metadata": {
+        "description": "The Sku for the availability set. Use Aligned for managed disks and Classic for classic disks."
+      }
+    }
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[parameters('availabilitySetName')]",
+      "apiVersion": "2016-04-30-preview",
+      "location": "[parameters('deploymentLocation')]",
+      "properties": {
+        "platformUpdateDomainCount": "[parameters('numberOfFaultDomains')]",
+        "platformUpdateDomainCount": "[parameters('numberOfUpdateDomains')]"
+      },
+      "sku": {
+        "name": "[parameters('availabilitySetSku')]"
+      }
+    }
+  ],
+  "outputs": {
+
+  }
+}
