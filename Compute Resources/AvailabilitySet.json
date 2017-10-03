@@ -45,7 +45,7 @@
     }
   },
   "variables": {
-
+    "resourceId": "[resourceId('Microsoft.Compute/availabilitySets',parameters('availabilitySetName'))]"
   },
   "resources": [
     {
@@ -63,6 +63,9 @@
     }
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('resourceId')]"
+    }
   }
 }
