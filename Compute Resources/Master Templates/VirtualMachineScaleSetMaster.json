@@ -104,7 +104,7 @@
       "type": "Microsoft.Compute/virtualMachineScaleSets",
       "name": "[variables('virtualMachineScaleSetName')]",
       "location": "[parameters('deploymentLocation')]",
-      "apiVersion": "2017-04-01",
+      "apiVersion": "2017-03-30",
       "dependsOn": [
       ],
       "sku": {
