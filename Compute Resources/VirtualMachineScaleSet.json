@@ -96,7 +96,7 @@
     },
     "loadBalancerInboundNatPools": {
       "type": "array",
-      "defautlValue": [],
+      "defaultValue": [],
       "metadata": {
         "description": "An array of load balancer inbound NAT pools linked to virtual machines in the scale set."
       }
