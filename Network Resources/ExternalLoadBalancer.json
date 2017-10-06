@@ -62,7 +62,7 @@
   },
   "resources": [
     {
-      "name": "[concat('Create-External-Load-Balancer-','parameters('loadBalancerName')')]",
+      "name": "[concat('Create-External-Load-Balancer-',parameters('loadBalancerName'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
@@ -92,7 +92,7 @@
           "backendAddressPools": {
             "value": [
               {
-                "name": "[variables('backEndAddressPoolName')]"
+                "name": "[parameters('backEndAddressPoolName')]"
               }
             ]
           },
