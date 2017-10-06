@@ -128,7 +128,7 @@
             "adminPassword": "[parameters('virtualMachineAdminPassword')]"
           },
           "networkProfile": {
-            "networkInterfaceConfigurations": "[parameters('virtualMachineScaleSetNamePrefix')]"
+            "networkInterfaceConfigurations": "[parameters('virtualMachineNetworkInterfaceConfiguration')]"
           }
         }
       }
