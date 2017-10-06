@@ -65,7 +65,7 @@
       "dependsOn": [
       ],
       "properties": {
-        "frontendIPConfigurations": "[parameters(''frontendIPConfigurations)]",
+        "frontendIPConfigurations": "[parameters('frontendIPConfigurations')]",
         "backendAddressPools": "[parameters('backendAddressPools')]",
         "loadBalancingRules": "[parameters('loadBalancingRules')]",
         "probes": "[parameters('probes')]",
@@ -76,7 +76,7 @@
   "outputs": {
     "resourceId": {
       "type": "string",
-      "value": "[variables('ipResourceId')]"
+      "value": "[variables('ResourceId')]"
     }
   }
 }
