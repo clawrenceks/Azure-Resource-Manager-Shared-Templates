@@ -1,0 +1,126 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "loadBalancerName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "The name of the load balancer that will be created."
+      }
+    },
+    "frontEndIpConfigurationName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the front end IP configuration that will be created for the load balancer."
+      }
+    },
+    "frontEndSubnetResourceId": {
+      "type": "string",
+      "metadata": {
+        "description": "The resource ID of the subnet that the internal load balancer should be connected to."
+      }
+    },
+    "frontEndPrivateIpAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The private IP address that should be associated with the internal load balancer."
+      }
+    },
+    "backEndAddressPoolName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the backend address pool to be created for the load balancer."
+      }
+    },
+    "loadBalancingRules": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of loadBalancingRule objects that should be applied to the load balancer."
+      }
+    },
+    "probes": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of probe objects that should be applied to the load balancer."
+      }
+    },
+    "inboundNatPools": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of inboundNatPool objects that should be applied to the load balancer."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+
+  },
+  "resources": [
+    {
+      "name": "[concat('Create-Internal-Load-Balancer-','parameters('loadBalancerName')')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Compute%20Resources/Master%20Templates/VirtualMachineScaleSetMaster.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "loadBalancerName": {
+            "value": "[parameters('loadBalancerName')]"
+          },
+          "frontendIPConfigurations": {
+            "value": [
+              {
+                "name": "[parameters('frontEndIpConfigurationName')]",
+                "properties": {
+                  "subnet": {
+                    "id": "[parameters('frontEndSubnetResourceId')]"
+                  },
+                  "privateIpAddress": "[parameters('frontEndPrivateIpAddress')]",
+                  "privatewIpAllocationMethod": "Static"
+                }
+              }
+            ]
+          },
+          "backendAddressPools": {
+            "value": [
+              {
+                "name": "[variables('backEndAddressPoolName')]"
+              }
+            ]
+          },
+          "loadBalancingRules": {
+            "value": "[parameters('loadBalancingRules')]"
+          },
+          "probes": {
+            "value": "[parameters('probes')]"
+          },
+          "inboundNatPools": {
+            "value": "[parameters('inboundNatPools')]"
+          },
+          "deploymentLocation": {
+            "value": "[parameters('deploymentLocation')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+
+  }
+}

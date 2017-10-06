@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "loadBalancerName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "The name of the load balancer that will be created."
+      }
+    },
+    "frontendIPConfigurations": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of frontendIPConfiguration objects that should be applied to the load balancer"
+      }
+    },
+    "backendAddressPools": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of backendAddressPool objects that should be applied to the load balancer"
+      }
+    },
+    "loadBalancingRules": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of loadBalancingRule objects that should be applied to the load balancer"
+      }
+    },
+    "probes": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of probe objects that should be applied to the load balancer"
+      }
+    },
+    "inboundNatPools": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of inboundNatPool objects that should be applied to the load balancer"
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "resourceId": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-09-01",
+      "type": "Microsoft.Network/loadBalancers",
+      "name": "[parameters('loadBalancerName')]",
+      "location": "[parameters('deploymentLocation')]",
+      "dependsOn": [
+      ],
+      "properties": {
+        "frontendIPConfigurations": "[parameters(''frontendIPConfigurations)]",
+        "backendAddressPools": "[parameters('backendAddressPools')]",
+        "loadBalancingRules": "[parameters('loadBalancingRules')]",
+        "probes": "[parameters('probes')]",
+        "inboundNatPools": "[parameters('inboundNatPools')]"
+      }
+    }
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('ipResourceId')]"
+    }
+  }
+}
