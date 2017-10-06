@@ -70,7 +70,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Compute%20Resources/Master%20Templates/VirtualMachineScaleSetMaster.json",
+          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Network%20Resources/Master%20Templates/LoadBalancerMaster.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
