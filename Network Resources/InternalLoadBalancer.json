@@ -92,7 +92,7 @@
                     "id": "[parameters('frontEndSubnetResourceId')]"
                   },
                   "privateIpAddress": "[parameters('frontEndPrivateIpAddress')]",
-                  "privatewIpAllocationMethod": "Static"
+                  "privateIpAllocationMethod": "Static"
                 }
               }
             ]
