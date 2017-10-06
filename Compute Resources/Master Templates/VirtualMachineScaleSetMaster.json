@@ -96,7 +96,7 @@
     }
   },
   "variables": {
-    "virtualMachineScaleSetName": "[toLower(substring(concat(parameters('virtualMachineScaleSetNamePrefix'), uniqueString(resourceGroup().id)), 0, 9))]",
+    "virtualMachineScaleSetName": "[toLower(substring(concat(parameters('virtualMachineScaleSetNamePrefix'),'-',uniqueString(resourceGroup().id)), 0, 61))]",
     "resourceId": "[resourceId('Microsoft.Compute/virtualMachineScaleSets',variables('virtualMachineScaleSetName'))]"
   },
   "resources": [
