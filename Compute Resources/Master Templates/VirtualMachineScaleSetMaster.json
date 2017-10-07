@@ -87,6 +87,12 @@
         "description": "A Network Interface Configuration Array used to configure the network profile of all virtual machines in the scale set."
       }
     },
+    "virtualMachineNetworkInterfaceConfiguration": {
+      "type": "array",
+      "metadata": {
+        "description": "A virtual machine extension array used to configure the virtual machine extensions added to virtual machines in the scale set."
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -129,6 +135,9 @@
           },
           "networkProfile": {
             "networkInterfaceConfigurations": "[parameters('virtualMachineNetworkInterfaceConfiguration')]"
+          },
+          "extensionProfile": {
+            "extensions": "[parameters('virtualMachineNetworkInterfaceConfiguration')]"
           }
         }
       }
