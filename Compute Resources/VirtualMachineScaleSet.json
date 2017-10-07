@@ -101,6 +101,13 @@
         "description": "An array of load balancer inbound NAT pools linked to virtual machines in the scale set."
       }
     },
+    "virtualMachineExtensions": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of virtual machine extension objects that should be added to virtual machines in the scale set."
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -182,6 +189,9 @@
                 }
               }
             ]
+          },
+          "virtualMachineNetworkExtensionsConfiguration": {
+            "value": "[parameters('virtualMachineExtensions')]"
           },
           "deploymentLocation": {
             "value": "[parameters('deploymentLocation')]"
