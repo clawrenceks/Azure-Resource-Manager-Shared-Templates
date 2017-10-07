@@ -64,11 +64,11 @@
     }
   },
   "variables": {
-
+    "loadBalancerDeploymentName": "[concat('Create-Internal-Load-Balancer-',parameters('loadBalancerName'))]"
   },
   "resources": [
     {
-      "name": "[concat('Create-Internal-Load-Balancer-',parameters('loadBalancerName'))]",
+      "name": "variables('loadBalancerDeploymentName')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
@@ -121,6 +121,9 @@
     }
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[reference(variables('loadBalancerDeploymentName')).outputs.resourceId.value]"
+    }
   }
 }
