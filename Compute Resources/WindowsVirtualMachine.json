@@ -28,6 +28,13 @@
         "description": ""
       }
     },
+    "vmAvailabilitySetObject": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An availability set object for the availability set that the virtual machine should be joined to. If not set the virtual machine will not be joined to an availability set."
+      }
+    },
     "vmOperatingSystemOsDiskObject": {
       "type": "object",
       "metadata": {
@@ -79,6 +86,7 @@
       "location": "[parameters('deploymentLocation')]",
       "dependsOn": [],
       "properties": {
+        "availabilitySet": "[parameters('vmAvailabilitySetObject')]",
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
