@@ -1,0 +1,108 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16,
+      "metadata": {
+        "description": "The name of the virtual machine to be created."
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the virtual machine to be created, for example Standard_A1"
+      }
+    },
+    "vmAdminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": ""
+      }
+    },
+    "vmAdminPassword": {
+      "type": "string",
+      "metadata": {
+        "description": ""
+      }
+    },
+    "vmOperatingSystemOsDiskObject": {
+      "type": "object",
+      "metadata": {
+        "description": "The OsDisk object for the Operating System Disk to be used by the virtual machines."
+      }
+    },
+    "vmOperatingSystemImageReference": {
+      "type": "object",
+      "metadata": {
+        "description": "The image reference object for the operating system image to be used by the virtual machines."
+      }
+    },
+    "vmDataDisks": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": ""
+      }
+    },
+    "vmNetworkInterfaceConfiguration": {
+      "type": "array",
+      "metadata": {
+        "description": "A Network Interface Configuration Array used to configure the network profile ofthe virtual machine."
+      }
+    },
+    "vmDiagnosticsProfileObject": {
+      "type": "object",
+      "defautlValue": {},
+      "metadata": {
+        "description": "A Diagnostsics profile object used to configured the diagnostics profile for the virtual machine."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "resourceId": "[resourceId('Microsoft.Compute/virtualMachines',parameters('vmName'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-03-30",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[parameters('vmName')]",
+      "location": "[parameters('deploymentLocation')]",
+      "dependsOn": [],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmName')]",
+          "adminUsername": "[parameters('vmAdminUsername')]",
+          "adminPassword": "[parameters('vmAdminPassword')]"
+        },
+        "storageProfile": {
+          "osDisk": "[parameters('vmOperatingSystemOsDiskObject')]",
+          "imageReference": "[parameters('vmOperatingSystemImageReference')]",
+          "dataDisks": "[parameters('vmDataDisks')]"
+        },
+        "networkProfile": {
+          "networkInterfaceConfigurations": "[parameters('vmNetworkInterfaceConfiguration')]"
+        },
+        "diagnosticsProfile": "[parameters('vmDiagnosticsProfileObject')]"
+      }
+    }
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('resourceId')]"
+    }
+  }
+}
