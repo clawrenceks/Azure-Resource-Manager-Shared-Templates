@@ -51,7 +51,7 @@
         "administratorLoginPassword": "[parameters('sqlServerAdminPassword')]",
         "version": "12.0"
       },
-      "resources": []
+      "resources": "[parameters('sqlServerResources')]"
     }
   ],
   "outputs": {
