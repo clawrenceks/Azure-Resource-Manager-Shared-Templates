@@ -62,7 +62,7 @@
     },
     "vmDiagnosticsProfileObject": {
       "type": "object",
-      "defautlValue": {},
+      "defaultValue": {},
       "metadata": {
         "description": "A Diagnostsics profile object used to configured the diagnostics profile for the virtual machine."
       }
