@@ -30,24 +30,41 @@
     }
   },
   "variables": {
-    "resourceId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('nicName'))]"
+    "networkInterfaceDeploymentName": "[concat('Create-Network-Interface',parameters('nicName'))]"
   },
   "resources": [
     {
-      "name": "[parameters('nicName')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "apiVersion": "2017-09-01",
-      "location": "[parameters('deploymentLocation')]",
-      "dependsOn": [],
+      "name": "Create-Network-Interface-Without-Security-Group",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+      ],
       "properties": {
-        "ipConfigurations": "[parameters('nicIpConfigurations')]"
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Network%20Resources/Master%20Templates/NetworkInterfaceMaster.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "nicName": {
+            "value": "[parameters('nicName')]"
+          },
+          "nicPropertiesObject": {
+            "value": {
+              "ipConfigurations": "[parameters('nicIpConfigurations')]"
+            }
+          },
+          "deploymentLocation": {
+            "value": "[parameters('deploymentLocation')]"
+          }
+        }
       }
     }
   ],
   "outputs": {
     "resourceId": {
       "type": "string",
-      "value": "[variables('resourceId')]"
+      "value": "[reference('Create-Network-Interface-Without-Security-Group').outputs.resourceId.value]"
     }
   }
 }
