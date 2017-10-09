@@ -23,7 +23,7 @@
       }
     },
     "vmAdminPassword": {
-      "type": "string",
+      "type": "secureString",
       "metadata": {
         "description": "The admin password for the virtual machine."
       }
