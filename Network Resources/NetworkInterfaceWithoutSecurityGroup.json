@@ -30,11 +30,11 @@
     }
   },
   "variables": {
-    "networkInterfaceDeploymentName": "[concat('Create-Network-Interface',parameters('nicName'))]"
+    "networkInterfaceDeploymentName": "[concat('Create-',parameters('nicName'),'-Without-Security-Group')]"
   },
   "resources": [
     {
-      "name": "Create-Network-Interface-Without-Security-Group",
+      "name": "[variables('networkInterfaceDeploymentName')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
@@ -64,7 +64,7 @@
   "outputs": {
     "resourceId": {
       "type": "string",
-      "value": "[reference('Create-Network-Interface-Without-Security-Group').outputs.resourceId.value]"
+      "value": "[reference(variables('networkInterfaceDeploymentName')).outputs.resourceId.value]"
     }
   }
 }
