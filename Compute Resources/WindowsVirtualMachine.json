@@ -19,13 +19,13 @@
     "vmAdminUsername": {
       "type": "string",
       "metadata": {
-        "description": ""
+        "description": "The admin username for the virtual machine."
       }
     },
     "vmAdminPassword": {
       "type": "string",
       "metadata": {
-        "description": ""
+        "description": "The admin password for the virtual machine."
       }
     },
     "vmAvailabilitySetObject": {
@@ -51,7 +51,7 @@
       "type": "array",
       "defaultValue": [],
       "metadata": {
-        "description": ""
+        "description": "An array of data disk objects representing the data disks to be attached to the Virtual Machine."
       }
     },
     "vmNetworkInterfaceConfiguration": {
