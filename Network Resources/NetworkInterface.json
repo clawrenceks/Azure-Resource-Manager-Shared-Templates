@@ -40,8 +40,7 @@
       "location": "[parameters('deploymentLocation')]",
       "dependsOn": [],
       "properties": {
-        "ipConfigurations": "[parameters('nicIpConfigurations')]",
-        "networkSecurityGroup": "[parameters('nicNetworkSecurityGroupObject')]"
+        "ipConfigurations": "[parameters('nicIpConfigurations')]"
       }
     }
   ],
