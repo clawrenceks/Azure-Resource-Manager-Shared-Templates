@@ -101,7 +101,7 @@
           "dataDisks": "[parameters('vmDataDisks')]"
         },
         "networkProfile": {
-          "networkInterfaceConfigurations": "[parameters('vmNetworkInterfaceConfiguration')]"
+          "networkInterfaces": "[parameters('vmNetworkInterfaceConfiguration')]"
         },
         "diagnosticsProfile": "[parameters('vmDiagnosticsProfileObject')]"
       }
