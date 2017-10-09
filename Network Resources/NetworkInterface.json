@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "nicName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the network interface that will be created."
+      }
+    },
+    "nicIpConfigurations": {
+      "type": "array",
+      "metadata": {
+        "description": "An array of IP Configuration objects to be associated with the created nic."
+      }
+    },
+    "nicNetworkSecurityGroupObject": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "A network security group object containing the resource ID of any resource group that the network interace should be linked to."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "resourceId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('nicName'))]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('nicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2017-09-01",
+      "location": "[parameters('deploymentLocation')]",
+      "dependsOn": [],
+      "properties": {
+        "ipConfigurations": "[parameters('nicIpConfigurations')]",
+        "networkSecurityGroup": "[parameters('nicNetworkSecurityGroupObject')]"
+      }
+    }
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('resourceId')]"
+    }
+  }
+}
