@@ -152,9 +152,6 @@
           "storageAccountSku": {
             "value": "[parameters('storageAccountSku')]"
           },
-          "storageAccountType": {
-            "value": "[parameters('storageAccountType')]"
-          },
           "storageAccountCustomDomain": {
             "value": "[parameters('storageAccountCustomDomain')]"
           },
