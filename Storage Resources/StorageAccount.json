@@ -4,6 +4,8 @@
   "parameters": {
     "storageAccountNamePrefix": {
       "type": "string",
+      "minLength": 1,
+      "maxLength": 44,
       "metadata": {
         "description": "The prefix for the storage account name. Elements of the Resource Group ID will be added to this name to ensure uniqueness"
       }
@@ -128,7 +130,7 @@
     }
   },
   "variables": {
-    "storageAccountName": "[toLower(substring(concat(parameters('storageAccountNamePrefix'), uniqueString(resourceGroup().id)), 0, 80))]",
+    "storageAccountName": "[toLower(concat(parameters('storageAccountNamePrefix'), uniqueString(resourceGroup().id)))]",
     "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-', parameters('storageAccountNamePrefix'))]"
   },
   "resources": [
