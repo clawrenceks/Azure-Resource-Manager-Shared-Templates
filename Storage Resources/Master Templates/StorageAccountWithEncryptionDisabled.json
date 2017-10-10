@@ -45,6 +45,52 @@
         "description": "Indicates whether indirect CName validation is enabled. Default value is false. "
       }
     },
+    "storageAccountBlobEncryptionEnabled": {
+      "type": "bool",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "Specifies whether blob encryption should be enabled for the storage account."
+      }
+    },
+    "storageAccountFileEncryptionEnabled": {
+      "type": "bool",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "Specifies whether file encryption should be enabled for the storage account."
+      }
+    },
+    "storageAccountEncryptionKeySource": {
+      "type": "string",
+      "defaultValue": "Microsoft.Storage",
+      "allowedValues": [
+        "Microsoft.Storage",
+        "Microsoft.Keyvault"
+      ],
+      "metadata": {
+        "description": "Specifies the key source when encryption for when encryption is enabled."
+      }
+    },
+    "storageAccountEncryptionKeyName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The name of the key vault which holds the keys used for encryption."
+      }
+    },
+    "storageAccountEncryptionKeyVersion": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The version of the key vault which holds the keys used for encryption."
+      }
+    },
+    "storageAccountEncryptionKeyVaultUri": {
+      "type": "string",
+      "defaultValue": ""
+      "metadata": {
+        "description": "The uri of the key vault which holds the keys used for encryption."
+      }
+    },
     "storageAccountAccessTier": {
       "type": "string",
       "defaultValue": "Hot",
