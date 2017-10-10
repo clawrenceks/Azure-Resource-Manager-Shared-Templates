@@ -23,16 +23,6 @@
         "description": "The sku for the storageAccount to be created."
       }
     },
-    "storageAccountType": {
-      "type": "string",
-      "allowedValues": [
-        "Storage",
-        "BlobStorage"
-      ],
-      "metadata": {
-        "description": "The type of the storage account to be created."
-      }
-    },
     "storageAccountCustomDomain": {
       "type": "string",
       "defaultValue": "",
@@ -47,34 +37,20 @@
         "description": "Indicates whether indirect CName validation is enabled. Default value is false. "
       }
     },
-    "storageAccountEncryptionStatus": {
-      "type": "string",
-      "defaultValue": "Disabled",
-      "allowedValues": [
-        "Enabled",
-        "Disabled"
-      ],
-      "metadata": {
-        "description": "Specifies if encryption will be used for the storage account."
-      }
-    },
     "storageAccountBlobEncryptionEnabled": {
       "type": "bool",
-      "defaultValue": false,
       "metadata": {
         "description": "Specifies whether blob encryption should be enabled for the storage account."
       }
     },
     "storageAccountFileEncryptionEnabled": {
       "type": "bool",
-      "defaultValue": false,
       "metadata": {
         "description": "Specifies whether file encryption should be enabled for the storage account."
       }
     },
     "storageAccountEncryptionKeySource": {
       "type": "string",
-      "defaultValue": "Microsoft.Storage",
       "allowedValues": [
         "Microsoft.Storage",
         "Microsoft.Keyvault"
@@ -85,21 +61,18 @@
     },
     "storageAccountEncryptionKeyName": {
       "type": "string",
-      "defaultValue": "",
       "metadata": {
         "description": "The name of the key vault which holds the keys used for encryption."
       }
     },
     "storageAccountEncryptionKeyVersion": {
       "type": "string",
-      "defaultValue": "",
       "metadata": {
         "description": "The version of the key vault which holds the keys used for encryption."
       }
     },
     "storageAccountEncryptionKeyVaultUri": {
       "type": "string",
-      "defaultValue": "",
       "metadata": {
         "description": "The uri of the key vault which holds the keys used for encryption."
       }
@@ -130,7 +103,7 @@
     }
   },
   "variables": {
-    "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-', parameters('storageAccountNamePrefix'))]"
+    "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-', parameters('storageAccountNamePrefix'),'-With-Encryption-Options')]"
   },
   "resources": [
     {
@@ -142,7 +115,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat('https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Storage%20Resources/Master%20Templates/',parameters('storageAccountType'),'AccountWithEncryption',parameters('storageAccountEncryptionStatus'),'.json')]",
+          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Storage%20Resources/Master%20Templates/StorageAccountMaster.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -153,37 +126,33 @@
             "value": "[parameters('storageAccountSku')]"
           },
           "storageAccountType": {
-            "value": "[parameters('storageAccountType')]"
+            "value": "BlobStorage"
           },
-          "storageAccountCustomDomain": {
-            "value": "[parameters('storageAccountCustomDomain')]"
-          },
-          "storageAccountUseSubdomain": {
-            "value": "[parameters('storageAccountUseSubdomain')]"
-          },
-          "storageAccountBlobEncryptionEnabled": {
-            "value": "[parameters('storageAccountBlobEncryptionEnabled')]"
-          },
-          "storageAccountFileEncryptionEnabled": {
-            "value": "[parameters('storageAccountFileEncryptionEnabled')]"
-          },
-          "storageAccountEncryptionKeySource": {
-            "value": "[parameters('storageAccountEncryptionKeySource')]"
-          },
-          "storageAccountEncryptionKeyName": {
-            "value": "[parameters('storageAccountEncryptionKeyName')]"
-          },
-          "storageAccountEncryptionKeyVersion": {
-            "value": "[parameters('storageAccountEncryptionKeyVersion')]"
-          },
-          "storageAccountEncryptionKeyVaultUri": {
-            "value": "[parameters('storageAccountEncryptionKeyVaultUri')]"
-          },
-          "storageAccountAccessTier": {
-            "value": "[parameters('storageAccountAccessTier')]"
-          },
-          "storageAccountSupportsHttpsTrafficOnly": {
-            "value": "[parameters('storageAccountSupportsHttpsTrafficOnly')]"
+          "storageAccountPropertiesObject": {
+            "value": {
+              "customDomain": {
+                "name": "[parameters('storageAccountCustomDomain')]",
+                "useSubDomain": "[parameters('storageAccountUseSubdomain')]"
+              },
+              "encryption": {
+                "services": {
+                  "blob": {
+                    "enabled": "[parameters('storageAccountBlobEncryptionEnabled')]"
+                  },
+                  "file": {
+                    "enabled": "[parameters('storageAccountFileEncryptionEnabled')]"
+                  }
+                },
+                "keySource": "[parameters('storageAccountEncryptionKeySource')]",
+                "keyvaultproperties": {
+                  "keyname": "[parameters('storageAccountEncryptionKeyName')]",
+                  "keyversion": "[parameters('storageAccountEncryptionKeyVersion')]",
+                  "keyvaulturi": "[parameters('storageAccountEncryptionKeyVaultUri')]"
+                }
+              },
+              "accessTier": "[parameters('storageAccountAccessTier')]",
+              "supportsHttpsTrafficOnly": "[parameters('storageAccountSupportsHttpsTrafficOnly')]"
+            }
           },
           "deploymentLocation": {
             "value": "[parameters('deploymentLocation')]"
@@ -193,6 +162,9 @@
     }
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[reference(variables('storageAccountDeploymentName')).outputs.resourceId.value]"
+    }
   }
 }

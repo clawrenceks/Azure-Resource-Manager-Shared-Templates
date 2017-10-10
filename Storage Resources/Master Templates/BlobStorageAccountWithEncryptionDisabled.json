@@ -23,16 +23,6 @@
         "description": "The sku for the storageAccount to be created."
       }
     },
-    "storageAccountType": {
-      "type": "string",
-      "allowedValues": [
-        "Storage",
-        "BlobStorage"
-      ],
-      "metadata": {
-        "description": "The type of the storage account to be created."
-      }
-    },
     "storageAccountCustomDomain": {
       "type": "string",
       "defaultValue": "",
@@ -45,17 +35,6 @@
       "defaultValue": false,
       "metadata": {
         "description": "Indicates whether indirect CName validation is enabled. Default value is false. "
-      }
-    },
-    "storageAccountEncryptionStatus": {
-      "type": "string",
-      "defaultValue": "Disabled",
-      "allowedValues": [
-        "Enabled",
-        "Disabled"
-      ],
-      "metadata": {
-        "description": "Specifies if encryption will be used for the storage account."
       }
     },
     "storageAccountBlobEncryptionEnabled": {
@@ -130,7 +109,7 @@
     }
   },
   "variables": {
-    "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-', parameters('storageAccountNamePrefix'))]"
+    "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-',parameters('storageAccountNamePrefix'),'-Without-Encryption-Options')]"
   },
   "resources": [
     {
@@ -142,7 +121,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat('https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Storage%20Resources/Master%20Templates/',parameters('storageAccountType'),'AccountWithEncryption',parameters('storageAccountEncryptionStatus'),'.json')]",
+          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Storage%20Resources/Master%20Templates/StorageAccountMaster.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -153,37 +132,17 @@
             "value": "[parameters('storageAccountSku')]"
           },
           "storageAccountType": {
-            "value": "[parameters('storageAccountType')]"
+            "value": "BlobStorage"
           },
-          "storageAccountCustomDomain": {
-            "value": "[parameters('storageAccountCustomDomain')]"
-          },
-          "storageAccountUseSubdomain": {
-            "value": "[parameters('storageAccountUseSubdomain')]"
-          },
-          "storageAccountBlobEncryptionEnabled": {
-            "value": "[parameters('storageAccountBlobEncryptionEnabled')]"
-          },
-          "storageAccountFileEncryptionEnabled": {
-            "value": "[parameters('storageAccountFileEncryptionEnabled')]"
-          },
-          "storageAccountEncryptionKeySource": {
-            "value": "[parameters('storageAccountEncryptionKeySource')]"
-          },
-          "storageAccountEncryptionKeyName": {
-            "value": "[parameters('storageAccountEncryptionKeyName')]"
-          },
-          "storageAccountEncryptionKeyVersion": {
-            "value": "[parameters('storageAccountEncryptionKeyVersion')]"
-          },
-          "storageAccountEncryptionKeyVaultUri": {
-            "value": "[parameters('storageAccountEncryptionKeyVaultUri')]"
-          },
-          "storageAccountAccessTier": {
-            "value": "[parameters('storageAccountAccessTier')]"
-          },
-          "storageAccountSupportsHttpsTrafficOnly": {
-            "value": "[parameters('storageAccountSupportsHttpsTrafficOnly')]"
+          "storageAccountPropertiesObject": {
+            "value": {
+              "customDomain": {
+                "name": "[parameters('storageAccountCustomDomain')]",
+                "useSubDomain": "[parameters('storageAccountUseSubdomain')]"
+              },
+              "accessTier": "[parameters('storageAccountAccessTier')]",
+              "supportsHttpsTrafficOnly": "[parameters('storageAccountSupportsHttpsTrafficOnly')]"
+            }
           },
           "deploymentLocation": {
             "value": "[parameters('deploymentLocation')]"
@@ -193,6 +152,9 @@
     }
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[reference(variables('storageAccountDeploymentName')).outputs.resourceId.value]"
+    }
   }
 }

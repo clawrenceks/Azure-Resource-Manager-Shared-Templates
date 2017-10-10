@@ -23,16 +23,6 @@
         "description": "The sku for the storageAccount to be created."
       }
     },
-    "storageAccountType": {
-      "type": "string",
-      "allowedValues": [
-        "Storage",
-        "BlobStorage"
-      ],
-      "metadata": {
-        "description": "The type of the storage account to be created."
-      }
-    },
     "storageAccountCustomDomain": {
       "type": "string",
       "defaultValue": "",
@@ -142,7 +132,7 @@
             "value": "[parameters('storageAccountSku')]"
           },
           "storageAccountType": {
-            "value": "[parameters('storageAccountType')]"
+            "value": "Storage"
           },
           "storageAccountPropertiesObject": {
             "value": {
@@ -150,7 +140,6 @@
                 "name": "[parameters('storageAccountCustomDomain')]",
                 "useSubDomain": "[parameters('storageAccountUseSubdomain')]"
               },
-              "accessTier": "[parameters('storageAccountAccessTier')]",
               "supportsHttpsTrafficOnly": "[parameters('storageAccountSupportsHttpsTrafficOnly')]"
             }
           },
