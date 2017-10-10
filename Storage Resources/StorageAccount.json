@@ -40,7 +40,7 @@
     },
     "storageAccountUseSubdomain": {
       "type": "bool",
-      "defaultValue": "false",
+      "defaultValue": false,
       "metadata": {
         "description": "Indicates whether indirect CName validation is enabled. Default value is false. "
       }
@@ -58,14 +58,14 @@
     },
     "storageAccountBlobEncryptionEnabled": {
       "type": "bool",
-      "defaultValue": "false",
+      "defaultValue": false,
       "metadata": {
         "description": "Specifies whether blob encryption should be enabled for the storage account."
       }
     },
     "storageAccountFileEncryptionEnabled": {
       "type": "bool",
-      "defaultValue": "false",
+      "defaultValue": false,
       "metadata": {
         "description": "Specifies whether file encryption should be enabled for the storage account."
       }
@@ -114,7 +114,7 @@
       }
     },
     "storageAccountSupportsHttpsTrafficOnly": {
-      "type": "bool",
+      "type": "string",
       "metadata": {
         "description": "Specifies whether only HTTPS traffic should be allowed to the storage service."
       }
