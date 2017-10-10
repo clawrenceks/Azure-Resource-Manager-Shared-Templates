@@ -40,7 +40,7 @@
     },
     "storageAccountUseSubdomain": {
       "type": "bool",
-      "defaultValue": "false",
+      "defaultValue": false,
       "metadata": {
         "description": "Indicates whether indirect CName validation is enabled. Default value is false. "
       }
@@ -97,7 +97,7 @@
       }
     },
     "storageAccountSupportsHttpsTrafficOnly": {
-      "type": "bool",
+      "type": "string",
       "metadata": {
         "description": "Specifies whether only HTTPS traffic should be allowed to the storage service."
       }
