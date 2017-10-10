@@ -120,7 +120,7 @@
   },
   "variables": {
     "storageAccountName": "[toLower(concat(parameters('storageAccountNamePrefix'), uniqueString(resourceGroup().id)))]",
-    "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-', parameters('storageAccountNamePrefix','-Without-Encryption-Options'))]"
+    "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-',parameters('storageAccountNamePrefix'),'-Without-Encryption-Options')]"
   },
   "resources": [
     {
