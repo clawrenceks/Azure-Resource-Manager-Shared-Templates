@@ -5,7 +5,7 @@
     "storageAccountNamePrefix": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 16,
+      "maxLength": 12,
       "metadata": {
         "description": "The prefix for the storage account name. Elements of the Resource Group ID will be added to this name to ensure uniqueness"
       }
@@ -48,7 +48,7 @@
     }
   },
   "variables": {
-    "storageAccountName": "[toLower(substring(concat(parameters('storageAccountNamePrefix'), uniqueString(resourceGroup().id)),0,24))]",
+    "storageAccountName": "[toLower(concat(parameters('storageAccountNamePrefix'), uniqueString(resourceGroup().id)))]",
     "storageAccountResouceId": "[resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName'))]"
   },
   "resources": [
