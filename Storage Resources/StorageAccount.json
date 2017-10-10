@@ -1,0 +1,197 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccountNamePrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "The prefix for the storage account name. Elements of the Resource Group ID will be added to this name to ensure uniqueness"
+      }
+    },
+    "storageAccountSku": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Standard_ZRS",
+        "Premium_LRS"
+      ],
+      "metadata": {
+        "description": "The sku for the storageAccount to be created."
+      }
+    },
+    "storageAccountType": {
+      "type": "string",
+      "allowedValues": [
+        "Storage",
+        "BlobStorage"
+      ],
+      "metadata": {
+        "description": "The type of the storage account to be created."
+      }
+    },
+    "storageAccountCustomDomain": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The CNAME of a the custom domain name assigned to the storage account."
+      }
+    },
+    "storageAccountUseSubdomain": {
+      "type": "bool",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "Indicates whether indirect CName validation is enabled. Default value is false. "
+      }
+    },
+    "storageAccountEncryptionStatus": {
+      "type": "string",
+      "defaultValue": "Disabled",
+      "allowedValues": [
+        "Enabled",
+        "Disabled"
+      ],
+      "metadata": {
+        "description": "Specifies if encryption will be used for the storage account."
+      }
+    },
+    "storageAccountBlobEncryptionEnabled": {
+      "type": "bool",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "Specifies whether blob encryption should be enabled for the storage account."
+      }
+    },
+    "storageAccountFileEncryptionEnabled": {
+      "type": "bool",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "Specifies whether file encryption should be enabled for the storage account."
+      }
+    },
+    "storageAccountEncryptionKeySource": {
+      "type": "string",
+      "defaultValue": "Microsoft.Storage",
+      "allowedValues": [
+        "Microsoft.Storage",
+        "Microsoft.Keyvault"
+      ],
+      "metadata": {
+        "description": "Specifies the key source when encryption for when encryption is enabled."
+      }
+    },
+    "storageAccountEncryptionKeyName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The name of the key vault which holds the keys used for encryption."
+      }
+    },
+    "storageAccountEncryptionKeyVersion": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The version of the key vault which holds the keys used for encryption."
+      }
+    },
+    "storageAccountEncryptionKeyVaultUri": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The uri of the key vault which holds the keys used for encryption."
+      }
+    },
+    "storageAccountAccessTier": {
+      "type": "string",
+      "defaultValue": "Hot",
+      "allowedValues": [
+        "Hot",
+        "Cool"
+      ],
+      "metadata": {
+        "description": "The access tier of the storage account, only required for BlobStorage accounts."
+      }
+    },
+    "storageAccountSupportsHttpsTrafficOnly": {
+      "type": "bool",
+      "metadata": {
+        "description": "Specifies whether only HTTPS traffic should be allowed to the storage service."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "storageAccountName": "[toLower(substring(concat(parameters('storageAccountNamePrefix'), uniqueString(resourceGroup().id)), 0, 80))]",
+    "storageAccountDeploymentName": "[concat('Deploy-Storage-Account-', parameters('storageAccountNamePrefix'))]"
+  },
+  "resources": [
+    {
+      "name": "[variables('storageAccountDeploymentName')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat('https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Storage%20Resources/Master%20Templates/StorageAccountWithEncryption',parameters('storageAccountEncryptionStatus'),'.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "storageAccountNamePrefix": {
+            "value": "[variables('storageAccountName')]"
+          },
+          "storageAccountSku": {
+            "value": "[parameters('storageAccountSku')]"
+          },
+          "storageAccountType": {
+            "value": "[parameters('storageAccountType')]"
+          },
+          "storageAccountCustomDomain": {
+            "value": "[parameters('storageAccountCustomDomain')]"
+          },
+          "storageAccountUseSubdomain": {
+            "value": "[parameters('storageAccountUseSubdomain')]"
+          },
+          "storageAccountBlobEncryptionEnabled": {
+            "value": "[parameters('storageAccountBlobEncryptionEnabled')]"
+          },
+          "storageAccountFileEncryptionEnabled": {
+            "value": "[parameters('storageAccountFileEncryptionEnabled')]"
+          },
+          "storageAccountEncryptionKeySource": {
+            "value": "[parameters('storageAccountEncryptionKeySource')]"
+          },
+          "storageAccountEncryptionKeyName": {
+            "value": "[parameters('storageAccountEncryptionKeyName')]"
+          },
+          "storageAccountEncryptionKeyVersion": {
+            "value": "[parameters('storageAccountEncryptionKeyVersion')]"
+          },
+          "storageAccountEncryptionKeyVaultUri": {
+            "value": "[parameters('storageAccountEncryptionKeyVaultUri')]"
+          },
+          "storageAccountAccessTier": {
+            "value": "[parameters('storageAccountAccessTier')]"
+          },
+          "storageAccountSupportsHttpsTrafficOnly": {
+            "value": "[parameters('storageAccountSupportsHttpsTrafficOnly')]"
+          },
+          "deploymentLocation": {
+            "value": "[parameters('deploymentLocation')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+
+  }
+}
