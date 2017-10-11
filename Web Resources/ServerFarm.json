@@ -48,14 +48,14 @@
     },         
     "workerTierName": {
       "type": "string",
-      "defaultValue": null,
+      "defaultValue": "",
       "metadata": {
         "description": "The worker tier name to be used by the Server Farm." 
       }
     },
     "adminSiteName": {
       "type": "string",
-      "defaultValue": null,
+      "defaultValue": "",
       "metadata": {
         "description": "The admin site name to be used by the Server Farm." 
       }
