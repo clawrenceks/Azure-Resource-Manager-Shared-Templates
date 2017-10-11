@@ -149,8 +149,7 @@
         "tier": "[parameters('serverFarmSkuTier')]",
         "size": "[parameters('serverFarmSize')]",
         "family": "[parameters('serverFarmFamily')]",
-        "capacity": "[parameters('serverFarmCapacity')]",
-        "skuCapacity": "[parameters('serverFarmSkuCapacityObject')]"
+        "capacity": "[parameters('serverFarmCapacity')]"
       }
     }      
   ],
