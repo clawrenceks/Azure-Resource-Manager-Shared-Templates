@@ -1,0 +1,165 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "serverFarmName":{
+      "type": "string",
+      "minValue": 1,
+      "maxLength": 40,
+      "metadata": {
+        "description": "The name of the Server Farm to be created."
+      }
+    },
+    "serverFarmKind": {
+      "type": "string",
+      "metadata": {
+        "description": "The kind of Server Farm to be created."
+      }
+    },
+    "serverFarmSku": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the SKU for the Server Farm."
+      }
+    },
+    "serverFarmSkuTier": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Tier for the Server Farm."
+      }
+    },
+    "serverFarmSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Size for the Server Farm."
+      }
+    },    
+    "serverFarmFamily": {
+      "type": "string",
+      "metadata": {
+        "description": "The code of the familty for the Server Farm."
+      }
+    },
+    "serverFarmCapacity": {
+      "type": "string",
+      "metadata": {
+        "description": "The number of instances to be used by the Server Farm"
+      }
+    },         
+    "workerTierName": {
+      "type": "string",
+      "defaultValue": null,
+      "metadata": {
+        "description": "The worker tier name to be used by the Server Farm." 
+      }
+    },
+    "adminSiteName": {
+      "type": "string",
+      "defaultValue": null,
+      "metadata": {
+        "description": "The admin site name to be used by the Server Farm." 
+      }
+    },
+    "hostingEnvironmentProfile": {
+      "type": "object",
+      "defaultValue": null,
+      "metadata": {
+        "description": "A hosting profile object to be linked to the Server Farm."
+      }
+    },
+    "enablePerSiteScaling": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies if per site scaling should be enabled for the Server Farm."
+      }
+    },
+    "reservedStatus": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies the reserved status for the Server Farm."
+      }
+    },
+    "targetWorkerCount": {
+      "type": "int",
+      "defaultValue": 0,
+      "metadata": {
+        "description": "Scaling worker count"
+      }
+    },
+    "targetWorkerSizeId": {
+      "type": "int",
+      "defaultValue": 0,
+      "metadata": {
+        "description": "Scaling worker size ID."
+      }
+    },
+    "serverFarmSkuCapacityObject": {
+      "type": "object",
+      "defaultValue": null,
+      "metadata": {
+        "description": "A SKU Capcaity Object containing additional capacity settings for the server farm."
+      }
+    },
+    "serverFarmLocationsArray": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of locations to be used by the Server Farm."
+      }
+    },
+    "serverFarmCapabilitiesArray": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of capability objects to associated with the Server Farm."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }    
+  },
+  "variables": {
+    "serverFarmResouceId": "[resourceId('Microsoft.Web/serverfarms',parameters('serverFarmName'))]"      
+  },
+  "resources": [
+    {
+      "name": "[parameters('serverFarmName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2016-09-01",
+      "kind": "[parameters('serverFarmKind')]",
+      "location": "[parameters('deploymentLocation')]",
+      "properties": {
+        "name": "[parameters('serverFarmName')]",
+        "workerTierName": "[parameters('workerTierName')]",
+        "adminSiteName": "[parameters('adminSiteName')]",
+        "hostingEnvironmentProfile": "[parameters('hostingEnvironmentProfile')]",
+        "perSiteScaling": "[parameters('enablePerSiteScaling')]",
+        "reserved": "[parameters('reservedStatus')]",
+        "targetWorkerCount": "[parameters('targetWorkerCount')]",
+        "targetWorkerSizeId": "[parameters('targetWorkerSizeId')]"
+      },
+      "sku": {
+        "name": "[parameters(serverFarmSku)]",
+        "tier": "[parameters(serverFarmSkuTier)]",
+        "size": "[parameters(serverFarmSize)]",
+        "family": "[parameters(serverFarmFamily)]",
+        "capacity": "[parameters(serverFarmCapacity)]",
+        "skuCapacity": "[parameters(serverFarmSkuCapacityObject)]",
+        "locations": "[parameters('serverFarmLocationsArray')]",
+        "capabilities": "[parameters('serverFarmCapabilitiesArray')]"
+      }
+    }      
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('serverFarmResouceId')]"
+    }    
+  }
+}
