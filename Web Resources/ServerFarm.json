@@ -62,7 +62,7 @@
     },
     "hostingEnvironmentProfile": {
       "type": "object",
-      "defaultValue": null,
+      "defaultValue": {},
       "metadata": {
         "description": "A hosting profile object to be linked to the Server Farm."
       }
