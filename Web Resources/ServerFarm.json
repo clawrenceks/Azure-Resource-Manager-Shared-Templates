@@ -60,13 +60,6 @@
         "description": "The admin site name to be used by the Server Farm." 
       }
     },
-    "hostingEnvironmentProfile": {
-      "type": "object",
-      "defaultValue": {},
-      "metadata": {
-        "description": "A hosting profile object to be linked to the Server Farm."
-      }
-    },
     "enablePerSiteScaling": {
       "type": "bool",
       "defaultValue": false,
@@ -95,27 +88,6 @@
         "description": "Scaling worker size ID."
       }
     },
-    "serverFarmSkuCapacityObject": {
-      "type": "object",
-      "defaultValue": {},
-      "metadata": {
-        "description": "A SKU Capcaity Object containing additional capacity settings for the server farm."
-      }
-    },
-    "serverFarmLocationsArray": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "An array of locations to be used by the Server Farm."
-      }
-    },
-    "serverFarmCapabilitiesArray": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "An array of capability objects to associated with the Server Farm."
-      }
-    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -138,7 +110,6 @@
         "name": "[parameters('serverFarmName')]",
         "workerTierName": "[parameters('workerTierName')]",
         "adminSiteName": "[parameters('adminSiteName')]",
-        "hostingEnvironmentProfile": "[parameters('hostingEnvironmentProfile')]",
         "perSiteScaling": "[parameters('enablePerSiteScaling')]",
         "reserved": "[parameters('reservedStatus')]",
         "targetWorkerCount": "[parameters('targetWorkerCount')]",
