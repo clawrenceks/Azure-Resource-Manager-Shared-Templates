@@ -97,7 +97,7 @@
     },
     "serverFarmSkuCapacityObject": {
       "type": "object",
-      "defaultValue": null,
+      "defaultValue": {},
       "metadata": {
         "description": "A SKU Capcaity Object containing additional capacity settings for the server farm."
       }
@@ -150,10 +150,10 @@
         "size": "[parameters('serverFarmSize')]",
         "family": "[parameters('serverFarmFamily')]",
         "capacity": "[parameters('serverFarmCapacity')]",
-        "skuCapacity": "[parameters('serverFarmSkuCapacityObject')]",
-        "locations": "[parameters('serverFarmLocationsArray')]",
-        "capabilities": "[parameters('serverFarmCapabilitiesArray')]"
-      }
+        "skuCapacity": "[parameters('serverFarmSkuCapacityObject')]"
+      },
+      "locations": "[parameters('serverFarmLocationsArray')]",
+      "capabilities": "[parameters('serverFarmCapabilitiesArray')]"
     }      
   ],
   "outputs": {
