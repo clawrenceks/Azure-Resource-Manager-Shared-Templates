@@ -4,7 +4,7 @@
   "parameters": {
     "serverFarmName":{
       "type": "string",
-      "minValue": 1,
+      "minLength": 1,
       "maxLength": 40,
       "metadata": {
         "description": "The name of the Server Farm to be created."
@@ -145,12 +145,12 @@
         "targetWorkerSizeId": "[parameters('targetWorkerSizeId')]"
       },
       "sku": {
-        "name": "[parameters(serverFarmSku)]",
-        "tier": "[parameters(serverFarmSkuTier)]",
-        "size": "[parameters(serverFarmSize)]",
-        "family": "[parameters(serverFarmFamily)]",
-        "capacity": "[parameters(serverFarmCapacity)]",
-        "skuCapacity": "[parameters(serverFarmSkuCapacityObject)]",
+        "name": "[parameters('serverFarmSku')]",
+        "tier": "[parameters('serverFarmSkuTier')]",
+        "size": "[parameters('serverFarmSize')]",
+        "family": "[parameters('serverFarmFamily')]",
+        "capacity": "[parameters('serverFarmCapacity')]",
+        "skuCapacity": "[parameters('serverFarmSkuCapacityObject')]",
         "locations": "[parameters('serverFarmLocationsArray')]",
         "capabilities": "[parameters('serverFarmCapabilitiesArray')]"
       }
