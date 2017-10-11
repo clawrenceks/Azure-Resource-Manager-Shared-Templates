@@ -152,7 +152,6 @@
         "capacity": "[parameters('serverFarmCapacity')]",
         "skuCapacity": "[parameters('serverFarmSkuCapacityObject')]"
       },
-      "locations": "[parameters('serverFarmLocationsArray')]",
       "capabilities": "[parameters('serverFarmCapabilitiesArray')]"
     }      
   ],
