@@ -82,8 +82,7 @@
         "serverFarmId": "[parameters('serverFarmId')]",
         "reserved": "[parameters('appReservedStatus')]",
         "siteConfig": "[parameters('siteConfigObject')]"
-      },
-      "resources": "[parameters('appResourcesArray')]"
+      }
     }
   ],
   "outputs": {
