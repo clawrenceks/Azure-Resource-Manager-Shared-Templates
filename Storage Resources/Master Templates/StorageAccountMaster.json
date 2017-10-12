@@ -79,6 +79,10 @@
     "resourceId": {
       "type": "string",
       "value": "[variables('storageAccountResouceId')]"
+    },
+    "storageAccountKeys": {
+      "type": "object",
+      "value": "[listKeys(variables('storageAccountName'), '2016-12-01')]"
     }
   }
 }
