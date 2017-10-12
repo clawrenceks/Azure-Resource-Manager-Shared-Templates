@@ -22,13 +22,7 @@
       "metadata": {
         "description": "The resource ID of the app server plan that the app should be linked to."
       }
-    },
-    "siteConfigObject": {
-      "type": "object",
-      "metadata": {
-        "description": "The siteConfig object used to configure the app."
-      }
-    },    
+    },  
     "appEnabled": {
       "type": "bool",
       "defaultValue": true,
