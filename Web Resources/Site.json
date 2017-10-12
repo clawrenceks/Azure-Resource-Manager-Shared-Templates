@@ -28,7 +28,7 @@
       "metadata": {
         "description": "The siteConfig object used to configure the app."
       }
-    },    
+    },
     "appEnabled": {
       "type": "bool",
       "defaultValue": true,
@@ -50,6 +50,13 @@
         "description": "The reserved status of the application, defaults to false."
       }
     },
+    "siteTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An object containing tags that should be added to the resource."
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -67,6 +74,7 @@
       "type": "Microsoft.Web/sites",
       "apiVersion": "2016-08-01",
       "kind": "[parameters('appKind')]",
+      "tags": "[parameters('siteTags')]",
       "location": "[parameters('deploymentLocation')]",
       "properties": {
         "enabled": "[parameters('appEnabled')]",

@@ -151,6 +151,9 @@
               "supportsHttpsTrafficOnly": "[parameters('storageAccountSupportsHttpsTrafficOnly')]"
             }
           },
+          "storageAccountTags": {
+            "value": "[parameters('storageAccountTags')]"
+          },
           "deploymentLocation": {
             "value": "[parameters('deploymentLocation')]"
           }

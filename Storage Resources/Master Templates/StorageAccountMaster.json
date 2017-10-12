@@ -63,6 +63,7 @@
       "name": "[variables('storageAccountName')]",
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2017-06-01",
+      "tags": "[parameters('storageAccountTags')]",
       "sku": {
         "name": "[parameters('storageAccountSku')]"
       },
