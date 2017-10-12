@@ -10,47 +10,12 @@
         "description": "The name of the app to be created."
       }
     },
-    "appKind": {
-      "type": "string",
-      "defaultValue": "app",
-      "metadata": {
-        "description": "The kind of app to be created. - e.g. app, functionapp etc."
-      }
-    },
     "serverFarmId": {
       "type": "string",
       "metadata": {
         "description": "The resource ID of the app server plan that the app should be linked to."
       }
-    },  
-    "appEnabled": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "description": "Specifies if the app is enabled."
-      }
     },
-    "hostNameSslStatesArray": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "An array of hostNameSslState Objects to be used by the app."
-      }
-    },
-    "appReservedStatus": {
-      "type": "bool",
-      "defaultValue": false,
-      "metadata": {
-        "description": "The reserved status of the application, defaults to false."
-      }
-    },
-    "appResourcesArray": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "An array of resource objects used to configure the app."
-      }
-    },    
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -67,7 +32,7 @@
       "name": "[parameters('appName')]",
       "type": "Microsoft.Web/sites",
       "apiVersion": "2016-08-01",
-      "kind": "[parameters('appKind')]",
+      "kind": "functionapp",
       "location": "[parameters('deploymentLocation')]",
       "properties": {
         "serverFarmId": "[parameters('serverFarmId')]",
