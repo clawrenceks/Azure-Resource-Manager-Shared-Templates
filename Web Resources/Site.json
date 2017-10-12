@@ -57,7 +57,7 @@
       "metadata": {
         "description": "An array of resource objects used to configure the app."
       }
-    }
+    
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
