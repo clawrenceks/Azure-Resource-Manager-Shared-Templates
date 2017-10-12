@@ -53,11 +53,11 @@
     },
     "appResourcesArray": {
       "type": "array",
-      "defaultValue": "[]",
+      "defaultValue": [],
       "metadata": {
         "description": "An array of resource objects used to configure the app."
       }
-    
+    },    
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -71,7 +71,7 @@
   },
   "resources": [
     {
-      "name": "[parameters('siteName')]",
+      "name": "[parameters('appName')]",
       "type": "Microsoft.Web/sites",
       "apiVersion": "2016-08-01",
       "kind": "[parameters('appKind')]",
