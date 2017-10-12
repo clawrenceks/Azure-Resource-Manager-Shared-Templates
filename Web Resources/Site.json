@@ -35,7 +35,6 @@
       "metadata": {
         "description": "Specifies if the app is enabled."
       }
-
     },
     "hostNameSslStatesArray": {
       "type": "array",
@@ -77,11 +76,16 @@
       "kind": "[parameters('appKind')]",
       "location": "[parameters('deploymentLocation')]",
       "properties": {
-        "enabled": "[parameters('appEnabled')]",
-        "hostNameSslStates": "[parameters('hostNameSslStatesArray')]",
         "serverFarmId": "[parameters('serverFarmId')]",
-        "reserved": "[parameters('appReservedStatus')]",
-        "siteConfig": "[parameters('siteConfigObject')]"
+        "siteConfig": {
+          "alwaysOn": true,
+          "appSettings": [
+            {
+              "name": "FUNCTIONS_EXTENSION_VERSION",
+              "value": "~1"
+            }
+          ]
+        }
       }
     }
   ],
