@@ -50,13 +50,6 @@
         "description": "The reserved status of the application, defaults to false."
       }
     },
-    "appResourcesArray": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "An array of resource objects used to configure the app."
-      }
-    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -81,8 +74,7 @@
         "serverFarmId": "[parameters('serverFarmId')]",
         "reserved": "[parameters('appReservedStatus')]",
         "siteConfig": "[parameters('siteConfigObject')]"
-      },
-      "resources": "[parameters('appResourcesArray')]"
+      }
     }
   ],
   "outputs": {
