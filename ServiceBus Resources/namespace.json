@@ -21,13 +21,6 @@
         "description": "The SKU for the service bus namespace to be created."
       }
     },
-    "serviceBusNamespaceTags": {
-      "type": "object",
-      "defaultValue": {},
-      "metadata": {
-        "description": "An object containing tags that should be added to the resource."
-      }
-    },
     "serviceBusNamespaceCapacity": {
       "type": "int",
       "defaultValue": 1,
@@ -38,6 +31,13 @@
       ],
       "metadata": {
         "description": "The specified messaging units for the tier. For Premium tier namespaces only, capacity options are 1,2 and 4."
+      }
+    },
+    "serviceBusNamespaceTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An object containing tags that should be added to the resource."
       }
     },
     "deploymentLocation": {
