@@ -5,7 +5,7 @@
     "serviceBusNamespaceNamePrefix": {
       "type": "string",
       "minLength": 6,
-      "maxLength": 50,
+      "maxLength": 36,
       "metadata": {
         "description": "The prefix for the service bus namespace name. Elements of the Resource Group ID will be added to this name to ensure uniqueness."
       }
@@ -49,7 +49,8 @@
     }
   },
   "variables": {
-    "serviceBusNamespaceName": "[concat(parameters('serviceBusNamespaceNamePrefix'), '-', uniqueString(resourceGroup().id))]"
+    "serviceBusNamespaceName": "[concat(parameters('serviceBusNamespaceNamePrefix'), '-', uniqueString(resourceGroup().id))]",
+    "resourceId": "[resourceId('Microsoft.ServiceBus/namespaces',variables('serviceBusNamespaceName'))]"
   },
   "resources": [
     {
@@ -69,6 +70,9 @@
     }
   ],
   "outputs": {
-
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('resourceId')]"
+    }
   }
 }
