@@ -1,0 +1,92 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualMachineName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the virtual machine that the extension should be applied to."
+      }
+    },
+    "extensionName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the extension to be added to the virtual machine."
+      }
+    },
+    "publisherName": {
+      "type": "string",
+      "metadata": {
+        "description": "The publisher of the extension to be added to the virtual machine."
+      }
+    },
+    "extensionType": {
+      "type": "string",
+      "metadata": {
+        "description": "The type of the extension to be added to the virtual machine."
+      }
+    },
+    "typeHandlerVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "The type handler version for the extension to be added to the virtual machine."
+      }
+    },
+    "autoUpgradeMinorVersion": {
+      "type": "bool",
+      "metadata": {
+        "description": "The auto upgrade minor version status of the extension to be added to the virtual machine."
+      }
+    },
+    "forceUpdateTag": {
+      "type": "string",
+      "metadata": {
+        "description": "The force update tag value for the extension."
+      }
+    },
+    "extensionSettingsObject": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The settings object for the extension that will be added to the virtual machine."
+      }
+    },
+    "extensionProtectedSettingsObject": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The protected settings object for the extension that will be added to the virtual machine."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('virtualMachineName'), '/',parameters('extensionName'))]",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "location": "[parameters('deploymentLocation')]",
+      "apiVersion": "2017-03-30",
+      "properties": {
+        "publisher": "[parameters('publisherName')]",
+        "type": "[parameters('extensionType')]",
+        "typeHandlerVersion": "[parameters('typeHandlerVersion')]",
+        "autoUpgradeMinorVersion": "[parameters('autoUpgradeMinorVersion')]",
+        "forceUpdateTag": "[parameters('forceUpdateTag')]",
+        "settings": "[parameters('extensionSettingsObject')]"
+      },
+      "protectedSettings": "[parameters('extensionProtectedSettingsObject')]"
+    }    
+  ],
+  "outputs": {
+
+  }
+}
