@@ -34,6 +34,7 @@
     },
     "autoUpgradeMinorVersion": {
       "type": "bool",
+      "defaultValue": true,
       "metadata": {
         "description": "The auto upgrade minor version status of the extension to be added to the virtual machine."
       }
