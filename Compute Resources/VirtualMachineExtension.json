@@ -80,9 +80,10 @@
         "typeHandlerVersion": "[parameters('typeHandlerVersion')]",
         "autoUpgradeMinorVersion": "[parameters('autoUpgradeMinorVersion')]",
         "forceUpdateTag": "[parameters('forceUpdateTag')]",
-        "settings": "[parameters('extensionSettingsObject')]"
+        "settings": "[parameters('extensionSettingsObject')]",
+        "protectedSettings": "[parameters('extensionProtectedSettingsObject')]"
       },
-      "protectedSettings": "[parameters('extensionProtectedSettingsObject')]"
+
     }    
   ],
   "outputs": {
