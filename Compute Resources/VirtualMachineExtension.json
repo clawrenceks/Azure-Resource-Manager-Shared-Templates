@@ -82,8 +82,7 @@
         "forceUpdateTag": "[parameters('forceUpdateTag')]",
         "settings": "[parameters('extensionSettingsObject')]",
         "protectedSettings": "[parameters('extensionProtectedSettingsObject')]"
-      },
-
+      }
     }    
   ],
   "outputs": {
