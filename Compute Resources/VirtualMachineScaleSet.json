@@ -61,6 +61,13 @@
         "description": "The image reference object for the operating system image to be used by the virtual machines in the scale set."
       }
     },
+    "virtualMachineDataDisksArray": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of data disks that should be added to virtual machines in the scale set."
+      }
+    },
     "virtualMachineNamePrefix": {
       "type": "string",
       "minLength": 1,
@@ -158,6 +165,9 @@
           },
           "virtualMachineOperatingSystemImageReference": {
             "value": "[parameters('virtualMachineOperatingSystemImageReference')]"
+          },
+          "virtualMachineDataDisksArray": {
+            "value": "[parameters('virtualMachineDataDisksArray')]"
           },
           "virtualMachineNamePrefix": {
             "value": "[parameters('virtualMachineNamePrefix')]"
