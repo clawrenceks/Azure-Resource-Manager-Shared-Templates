@@ -47,13 +47,13 @@
     },
     "extensionSettingsObject": {
       "type": "object",
-      "defaultValue": {},
       "metadata": {
         "description": "The settings object for the extension that will be added to the virtual machine."
       }
     },
     "extensionProtectedSettingsObject": {
       "type": "object",
+      "defaultValue": {},
       "metadata": {
         "description": "The protected settings object for the extension that will be added to the virtual machine."
       }
