@@ -176,6 +176,10 @@
       "type": "string",
       "value": "[reference(variables('storageAccountDeploymentName')).outputs.resourceId.value]"
     },
+    "storageAccountName": {
+      "type": "string",
+      "value": "[reference(variables('storageAccountDeploymentName')).outputs.storageAccountName.value]"
+    },
     "storageAccountKeys": {
       "type": "object",
       "value": "[reference(variables('storageAccountDeploymentName')).outputs.storageAccountKeys.value]"

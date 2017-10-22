@@ -80,6 +80,10 @@
       "type": "string",
       "value": "[variables('storageAccountResouceId')]"
     },
+    "storageAccountName": {
+      "type": "string",
+      "value": "[variables('storageAccountName')]"
+    },
     "storageAccountKeys": {
       "type": "object",
       "value": "[listKeys(variables('storageAccountName'), '2016-12-01')]"
