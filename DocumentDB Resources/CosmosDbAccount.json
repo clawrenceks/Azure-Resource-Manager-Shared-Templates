@@ -75,7 +75,7 @@
   },
   "variables": {
     "cosmosDbAccounttName": "[toLower(concat(parameters('cosmosDbAccountNamePrefix'), substring(uniqueString(resourceGroup().id),0,12)))]",
-    "cosmosDbAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName'))]"
+    "cosmosDbAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts',variables('cosmosDbAccounttName'))]"
   },
   "resources": [
     {
