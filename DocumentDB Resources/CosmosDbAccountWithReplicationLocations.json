@@ -1,0 +1,102 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cosmosDbAccountNamePrefix": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20,
+      "metadata": {
+        "description": "The prefix for the cosmos db account name. Elements of the Resource Group ID will be added to this name to ensure uniqueness"
+      }
+    },
+    "cosmosDbAccountType": {
+      "type": "string",
+      "allowedValues": [
+        "GlobalDocumentDB",
+        "MongoDB",
+        "Parse"
+      ],
+      "metadata": {
+        "description": "The type of the Cosmos DB Account to be created."
+      }
+    },
+    "consistencyPolicyObject": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An object containing the consistency policy settings for the Cosmos DB Account."
+      }
+    },
+    "locationsArray": {
+      "type": "array",
+      "metadata": {
+        "description": "An array of locations that should be enabled for the Cosmos DB Account."
+      }
+    },
+    "databaseAccountOfferType": {
+      "type": "string",
+      "allowedValues": [
+        "Standard"
+      ],
+      "defaultValue": "Standard",
+      "metadata": {
+        "description": "The Cosmos DB Account Sku - at the time of creation the only supported Sku is standard."
+      }
+    },
+    "ipRangeFilter": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for the cosmos db account."
+      }
+    },
+    "enableAutomaticFailover": {
+      "type": "bool",
+      "metadata": {
+        "description": "Specifiy whether automatica failover should be enabled for the cosmos db account."
+      }
+    },
+    "cosmosDbAccountTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An object containing tags that should be added to the resource."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "cosmosDbAccountName": "[toLower(concat(parameters('cosmosDbAccountNamePrefix'), substring(uniqueString(resourceGroup().id),0,12)))]",
+    "cosmosDbAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts',variables('cosmosDbAccountName'))]"
+  },
+  "resources": [
+    {
+      "name": "[variables('cosmosDbAccountName')]",
+      "type": "Microsoft.DocumentDB/databaseAccounts",
+      "apiVersion": "2015-04-08",
+      "location": "[parameters('deploymentLocation')]",
+      "tags": "[parameters('cosmosDbAccountTags')]",
+      "kind": "[parameters('cosmosDbAccountType')]",
+      "properties": {
+        "consistencyPolicy": "[parameters('consistencyPolicyObject')]",
+        "locations": "[parameters('locationsArray')]",
+        "databaseAccountOfferType": "[parameters('databaseAccountOfferType')]",
+        "ipRangeFilter": "[parameters('ipRangeFilter')]",
+        "enableAutomaticFailover": "[parameters('enableAutomaticFailover')]"
+      }
+    }
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('cosmosDbAccountResourceId')]"
+    }
+  }
+}

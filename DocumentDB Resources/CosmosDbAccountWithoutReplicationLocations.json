@@ -28,13 +28,6 @@
         "description": "An object containing the consistency policy settings for the Cosmos DB Account."
       }
     },
-    "locationsArray": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "An array of locations that should be enabled for the Cosmos DB Account."
-      }
-    },
     "databaseAccountOfferType": {
       "type": "string",
       "allowedValues": [
