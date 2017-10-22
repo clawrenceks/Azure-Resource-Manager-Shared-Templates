@@ -74,12 +74,12 @@
     }
   },
   "variables": {
-    "cosmosDbAccounttName": "[toLower(concat(parameters('cosmosDbAccountNamePrefix'), substring(uniqueString(resourceGroup().id),0,12)))]",
-    "cosmosDbAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts',variables('cosmosDbAccounttName'))]"
+    "cosmosDbAccountName": "[toLower(concat(parameters('cosmosDbAccountNamePrefix'), substring(uniqueString(resourceGroup().id),0,12)))]",
+    "cosmosDbAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts',variables('cosmosDbAccountName'))]"
   },
   "resources": [
     {
-      "name": "string",
+      "name": "[variables('cosmosDbAccountName')]",
       "type": "Microsoft.DocumentDB/databaseAccounts",
       "apiVersion": "2015-04-08",
       "location": "[parameters('deploymentLocation')]",
@@ -87,7 +87,6 @@
       "kind": "[parameters('cosmosDbAccountType')]",
       "properties": {
         "consistencyPolicy": "[parameters('consistencyPolicyObject')]",
-        "locations": "[parameters('locationsArray')]",
         "databaseAccountOfferType": "[parameters('databaseAccountOfferType')]",
         "ipRangeFilter": "[parameters('ipRangeFilter')]",
         "enableAutomaticFailover": "[parameters('enableAutomaticFailover')]"
