@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "containerRegistryName": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 36,
+      "metadata": {
+        "description": "The prefix for the container registry name. Elements of the Resource Group ID will be added to this name to ensure uniqueness"
+      }
+    },
+    "containerRegistrySku": {
+      "type": "string",
+      "allowedValues": [
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "metadata": {
+        "description": "The SKU for the container registry."
+      }
+    },
+    "adminUserEnabled": {
+      "type": "bool",
+      "metadata": {
+        "description": "Specificies if Admin User Access should be enabled for the registry."
+      }
+    },
+    "containerRegistryTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An object containing tags that should be added to the resource."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "containerRegistryName": "[toLower(concat(parameters('containerRegistryName'), substring(uniqueString(resourceGroup().id),0,12)))]",
+    "containerRegistryResourceId": "[resourceId('Microsoft.ContainerRegistry/registries',variables('containerRegistryName'))]"
+  },
+  "resources": [
+    {
+      "name": "[variables('containerRegistryName')]",
+      "type": "Microsoft.ContainerRegistry/registries",
+      "apiVersion": "2017-10-01",
+      "tags": "[parameters('containerRegistryTags')]",
+      "location": "[parameters('deploymentLocation')]",
+      "sku": {
+        "name": "[parameters('containerRegistrySku')]"
+      },
+      "properties": {
+        "adminUserEnabled": "[parameters('adminUserEnabled')]"
+      }
+    }
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('containerRegistryResourceId')]"
+    }
+  }
+}
