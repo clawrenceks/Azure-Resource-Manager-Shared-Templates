@@ -5,9 +5,9 @@
     "containerRegistryName": {
       "type": "string",
       "minLength": 5,
-      "maxLength": 36,
+      "maxLength": 50,
       "metadata": {
-        "description": "The prefix for the container registry name. Elements of the Resource Group ID will be added to this name to ensure uniqueness"
+        "description": "The name of the azure container registry to be created"
       }
     },
     "containerRegistrySku": {
@@ -43,12 +43,11 @@
     }
   },
   "variables": {
-    "containerRegistryName": "[toLower(concat(parameters('containerRegistryName'), substring(uniqueString(resourceGroup().id),0,12)))]",
-    "containerRegistryResourceId": "[resourceId('Microsoft.ContainerRegistry/registries',variables('containerRegistryName'))]"
+    "containerRegistryResourceId": "[resourceId('Microsoft.ContainerRegistry/registries',parameters('containerRegistryName'))]"
   },
   "resources": [
     {
-      "name": "[variables('containerRegistryName')]",
+      "name": "[parameters('containerRegistryName')]",
       "type": "Microsoft.ContainerRegistry/registries",
       "apiVersion": "2017-10-01",
       "tags": "[parameters('containerRegistryTags')]",
