@@ -34,6 +34,13 @@
       "metadata": {
         "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
       }
+    },
+    "nestedDeploymentsUrlBase": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/",
+      "metadata": {
+        "description": "The base URL of the location hosting the nested ARM templates used by this template."
+      }
     }
   },
   "variables": {
@@ -49,7 +56,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/Network%20Resources/Master%20Templates/VirtualNetworkMaster.json",
+          "uri": "[concat(parameters('nestedDeploymentsUrlBase'),'Network%20Resources/Master%20Templates/VirtualNetworkMaster.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
