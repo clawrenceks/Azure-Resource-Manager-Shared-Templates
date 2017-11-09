@@ -76,7 +76,8 @@
         "backendAddressPools": "[parameters('backendAddressPools')]",
         "loadBalancingRules": "[parameters('loadBalancingRules')]",
         "probes": "[parameters('probes')]",
-        "inboundNatPools": "[parameters('inboundNatPools')]"
+        "inboundNatPools": "[parameters('inboundNatPools')]",
+        "inboundNatRules": "[parameters('inboundNatRules')]"
       }
     }
   ],
