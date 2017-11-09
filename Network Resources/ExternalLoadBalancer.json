@@ -49,6 +49,13 @@
         "description": "An array of inboundNatPool objects that should be applied to the load balancer"
       }
     },
+    "inboundNatRules": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of inboundNatRule objects that should be applied to the load balancer"
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -111,6 +118,9 @@
           },
           "inboundNatPools": {
             "value": "[parameters('inboundNatPools')]"
+          },
+          "inboundNatRules": {
+            "value": "[parameters('inboundNatRules')]"
           },
           "deploymentLocation": {
             "value": "[parameters('deploymentLocation')]"
