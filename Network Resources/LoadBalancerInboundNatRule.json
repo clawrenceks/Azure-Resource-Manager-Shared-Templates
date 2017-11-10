@@ -5,13 +5,13 @@
     "ruleName": {
       "type": "string",
       "metadata": {
-        "description": ""
+        "description": "The name of the inbound nat rule to be created."
       }
     },
     "frontendIpConfigurationId": {
       "type": "string",
       "metadata": {
-        "description": ""
+        "description": "The resource ID of the load balancer front end IP configuration that should be associated with the nat rule."
       }
     },
     "protocol": {
@@ -21,7 +21,7 @@
         "Udp"
       ],
       "metadata": {
-        "description": ""
+        "description": "The protocol for the inbound nat rule to be created."
       }
     },
     "frontendPort": {
@@ -29,7 +29,7 @@
       "minValue": 1,
       "maxValue": 65535,
       "metadata": {
-        "description": ""
+        "description": "The frontend port for the inbound nat rule."
       }
     },
     "backendPort": {
@@ -37,13 +37,13 @@
       "minValue": 1,
       "maxValue": 65535,
       "metadata": {
-        "description": ""
+        "description": "The backend port for the inbound nat rule."
       }
     },
     "enableFloatingIp": {
       "type": "bool",
       "metadata": {
-        "description": ""
+        "description": "Specifies if Floating IP should be enabled for the nat rule."
       }
     },
     "deploymentLocation": {
