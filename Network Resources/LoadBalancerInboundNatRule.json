@@ -55,7 +55,6 @@
     }
   },
   "variables": {
-    "resourceId": "[resourceId('Microsoft.Network/loadBalancers/inboundNatRules',parameters('ruleName'))]"
   },
   "resources": [
     {
@@ -75,9 +74,5 @@
     }
   ],
   "outputs": {
-    "resourceId": {
-      "type": "string",
-      "value": "[variables('resourceId')]"
-    }
   }
 }
