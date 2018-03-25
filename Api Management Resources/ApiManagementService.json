@@ -1,0 +1,76 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apiManagementServiceNamePrefix": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 38,
+      "metadata": {
+        "description": "The prefix for the api management service that will be created, elements of the resource group id will be added to this name to ensure uniqueness"
+      }
+    },
+    "apiManagementServiceProperties": {
+      "type": "object",
+      "metadata": {
+        "description": "An Api Management Service properties object used to configure the service."
+      }
+    },
+    "apiManagementServiceSkuName": {
+      "type": "string",
+      "allowedValues": [
+        "Developer",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "defaultValue": "Developer",
+      "metadata": {
+        "description": "The name of the sku for the Api Management Service to be created."
+      }
+    },
+    "apiManagementServiceSkuCapacity": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "The capacity (number of deployed units) for the Api Management Service to be created"
+      }
+    },
+    "apiManagementServiceTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An object containing tags that should be added to the resource."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "apiManagementServiceName": "[concat(parameters('apiManagementServiceNamePrefix'), substring(uniqueString(resourceGroup().id),0,12))]"
+  },
+  "resources": [
+    {
+      "name": "[variables('apiManagementServiceName')]",
+      "type": "Microsoft.ApiManagement/service",
+      "apiVersion": "2017-03-01",
+      "tags": "[parameters('apiManagementServiceTags')]",
+      "properties": "[parameters('apiManagementServiceProperties')]",
+      "sku": {
+        "name": "[parameters('apiManagementServiceSkuName')]",
+        "capacity": "[parameters('apiManagementServiceSkuCapacity')]"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "[parameters('deploymentLocation')]"
+    }
+  ],
+  "outputs": {
+  }
+}
