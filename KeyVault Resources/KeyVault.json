@@ -100,7 +100,7 @@
   "resources": [
     {
       "name": "[concat('Deploy-Key-Vault-', parameters('keyVaultNamePrefix'),'With-Soft-Delete-Disabled')]",
-      "condition": "[equals(parameters('enableSoftDelete'),'false')]",
+      "condition": "[equals(parameters('enableSoftDelete'), false)]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
@@ -155,7 +155,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('nestedDeploymentsUrlBase'),'KeyVault%20Resources/Master%20Templates/','KeyVaultWithSoftDeleteDisabled.json')]",
+          "uri": "[concat(parameters('nestedDeploymentsUrlBase'),'KeyVault%20Resources/Master%20Templates/','KeyVaultWithSoftDeleteEnabled.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
