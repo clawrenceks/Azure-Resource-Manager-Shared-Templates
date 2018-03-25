@@ -100,7 +100,7 @@
   "resources": [
     {
       "name": "[concat('Deploy-Key-Vault-', parameters('keyVaultNamePrefix'),'With-Soft-Delete-Disabled')]",
-      "condition": "[equals(parameters('enableSoftDelete'), false)]",
+      "condition": "[equals(parameters('enableSoftDelete'), bool('false'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
@@ -147,7 +147,7 @@
     },
     {
       "name": "[concat('Deploy-Key-Vault-', parameters('keyVaultNamePrefix'),'With-Soft-Delete-Enabled')]",
-      "condition": "[equals(parameters('enableSoftDelete'),'true')]",
+      "condition": "[equals(parameters('enableSoftDelete'), bool('true'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
