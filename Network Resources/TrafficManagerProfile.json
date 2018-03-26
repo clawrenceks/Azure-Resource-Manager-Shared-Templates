@@ -1,0 +1,140 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "trafficManagerUniqueDnsPrefix": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "metadata": {
+        "description": "The unique DNS prefix to be used by the traffic manager profile"
+      }
+    },
+    "trafficManagerProfileStatus": {
+      "type": "string",
+      "defaultValue": "Enabled",
+      "allowedValues": [
+        "Enabled",
+        "Disabled"
+      ],
+      "metadata": {
+        "description": "The status for the newly created Traffic Manager Profile."
+      }
+    },
+    "trafficManagerRoutingMethod": {
+      "type": "string",
+      "allowedValues": [
+        "Performance",
+        "Priority",
+        "Weighted",
+        "Geographic"
+      ],
+      "metadata": {
+        "description": "The routing method for the Traffic Manager Profile."
+      }
+    },
+    "trafficManagerDnsTtl": {
+      "type": "int",
+      "metadata": {
+        "description": "The DNS Time-To-Live (TTL), in seconds. This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile"
+      }
+    },
+    "trafficManagerMonitorProtocol": {
+      "type": "string",
+      "allowedValues": [
+        "HTTP",
+        "HTTPS",
+        "TCP"
+      ],
+      "metadata": {
+        "description": "The protocol used to probe endpoint health."
+      }
+    },
+    "trafficManagerMonitorPort": {
+      "type": "int",
+      "metadata": {
+        "description": "The TCP port used to probe for endpoint health"
+      }
+    },
+    "trafficManagerMonitorPath": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "The path relative to the endpoint domain name used to probe for endpoint health"
+      }
+    },
+    "trafficManagerMonitorIntervalInSeconds": {
+      "type": "int",
+      "defaultValue": 30,
+      "metadata": {
+        "description": "The monitor interval for endpoints in this profile. This is the interval at which Traffic Manager will check the health of each endpoint in this profile."
+      }
+    },
+    "trafficManagerMonitorTimoutInSeconds": {
+      "type": "int",
+      "defaultValue": 10,
+      "metadata": {
+        "description": "The monitor timeout for endpoints in this profile. This is the time that Traffic Manager allows endpoints in this profile to response to the health check."
+      }
+    },
+    "trafficManagerMonitorToleratedNumberOfFailures": {
+      "type": "int",
+      "defaultValue": 3,
+      "metadata": {
+        "description": "The number of consecutive failed health check that Traffic Manager tolerates before declaring an endpoint in this profile Degraded after the next failed health check."
+      }
+    },
+    "trafficManagerTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "An object containing tags that should be added to the resource."
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    },
+    "nestedDeploymentsUrlBase": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/",
+      "metadata": {
+        "description": "The base URL of the location hosting the nested ARM templates used by this template."
+      }
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "name": "[parameters('trafficManagerUniqueDnsPrefix')]",
+      "type": "Microsoft.Network/trafficmanagerprofiles",
+      "apiVersion": "2017-05-01",
+      "tags": "[parameters('trafficManagerTags')]",
+      "location": "global",
+      "properties": {
+        "profileStatus": "[parameters('trafficManagerProfileStatus')]",
+        "trafficRoutingMethod": "[parameters('trafficManagerRoutingMethod')]",
+        "dnsConfig": {
+          "relativeName": "[parameters('trafficManagerUniqueDnsPrefix')]",
+          "ttl": "[parameters('trafficManagerDnsTtl')]"
+        },
+        "monitorConfig": {
+          "protocol": "[parameters('trafficManagerMonitorProtocol')]",
+          "port": "[parameters('trafficManagerMonitorPort')]",
+          "path": "[parameters('trafficManagerMonitorPath')]",
+          "intervalInSeconds": "[parameters('trafficManagerMonitorIntervalInSeconds')]",
+          "timeoutInSeconds": "[parameters('trafficManagerMonitorTimoutInSeconds')]",
+          "toleratedNumberOfFailures": "[parameters('trafficManagerMonitorToleratedNumberOfFailures')]"
+        },
+        "endpoints": [
+        ]
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
