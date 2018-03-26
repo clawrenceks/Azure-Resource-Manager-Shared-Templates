@@ -85,6 +85,13 @@
         "description": "The number of consecutive failed health check that Traffic Manager tolerates before declaring an endpoint in this profile Degraded after the next failed health check."
       }
     },
+    "trafficManagerProfileEndpoints": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of traffic manager endpoint objects to be associated with the traffic manager profile."
+      }
+    },
     "trafficManagerTags": {
       "type": "object",
       "defaultValue": {},
@@ -131,8 +138,7 @@
           "timeoutInSeconds": "[parameters('trafficManagerMonitorTimoutInSeconds')]",
           "toleratedNumberOfFailures": "[parameters('trafficManagerMonitorToleratedNumberOfFailures')]"
         },
-        "endpoints": [
-        ]
+        "endpoints": "[parameters('trafficManagerProfileEndpoints')]"
       }
     }
   ],
