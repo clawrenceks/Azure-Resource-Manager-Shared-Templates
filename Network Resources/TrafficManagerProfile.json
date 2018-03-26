@@ -35,6 +35,7 @@
     },
     "trafficManagerDnsTtl": {
       "type": "int",
+      "defaultValue": 300,
       "metadata": {
         "description": "The DNS Time-To-Live (TTL), in seconds. This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile"
       }
