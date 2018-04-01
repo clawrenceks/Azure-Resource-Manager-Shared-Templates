@@ -43,7 +43,7 @@
   },
   "resources": [
     {
-      "name": "[concat(parameters('sqlServerName'),concat(parameters('databaseName')]",
+      "name": "[concat(parameters('sqlServerName'),concat(parameters('databaseName'))]",
       "type": "Microsoft.Sql/servers/databases",
       "apiVersion": "2015-01-01",
       "tags": "[parameters('databaseTags')]",
