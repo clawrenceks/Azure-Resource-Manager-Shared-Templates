@@ -19,7 +19,13 @@
       "metadata": {
         "description": "The allocation method for the IP Address, valid options are Dynamic or Static"
       }
-
+    },
+    "ipTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The tags to apply to the created IP Address"
+      }
     },
     "deploymentLocation": {
       "type": "string",
@@ -38,6 +44,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[parameters('ipAddressName')]",
       "location": "[parameters('deploymentLocation')]",
+      "tags": "[parameters('ipTags')]",
       "properties": {
         "publicIPAllocationMethod": "[parameters('ipAddressAllocationType')]"
       }
