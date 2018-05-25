@@ -34,6 +34,12 @@
         "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
       }
     },
+    "nicTags": {
+      "type": "object",
+      "metadata": {
+        "description": "The tags to be applied to the created network interface."
+      }
+    },
     "nestedDeploymentsUrlBase": {
       "type": "string",
       "defaultValue": "https://raw.githubusercontent.com/clawrenceks/Azure-Resource-Manager-Shared-Templates/master/",
