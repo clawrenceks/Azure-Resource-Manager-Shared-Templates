@@ -91,7 +91,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('deploymentLocation')]",
-      "tags": "parameters('vmTags')",
+      "tags": "[parameters('vmTags')]",
       "dependsOn": [],
       "properties": {
         "availabilitySet": "[parameters('vmAvailabilitySetObject')]",
