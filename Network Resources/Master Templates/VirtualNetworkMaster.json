@@ -29,6 +29,13 @@
         "description": "An object representing the DhcpOptions for the vNet, defaults to using the Azure Defaults"
       }
     },
+    "vNetTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The tags to be added to the virtual network"
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
