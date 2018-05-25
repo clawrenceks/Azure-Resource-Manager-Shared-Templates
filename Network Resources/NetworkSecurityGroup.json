@@ -16,6 +16,13 @@
         "description": "An array of network security group rule objects to be added to the network security group"
       }
     },
+    "nsgTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "decription": "The tags to be applied to the create Network Security Group"
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
