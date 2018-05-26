@@ -60,6 +60,13 @@
         "description": "A Diagnostsics profile object used to configured the diagnostics profile for the virtual machine."
       }
     },
+    "nestedResources": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of nested resources that should be created with the virtual machine."
+      }
+    },
     "vmTags": {
       "type": "object",
       "defaultValue": {},
@@ -104,7 +111,8 @@
           "networkInterfaces": "[parameters('vmNetworkInterfaceConfiguration')]"
         },
         "diagnosticsProfile": "[parameters('vmDiagnosticsProfileObject')]"
-      }
+      },
+      "resources": "[parameters('nestedResources')]"
     }
   ],
   "outputs": {
