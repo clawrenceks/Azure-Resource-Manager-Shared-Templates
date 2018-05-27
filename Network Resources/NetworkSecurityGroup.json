@@ -40,6 +40,7 @@
       "apiVersion": "2017-03-01",
       "name": "[parameters('nsgName')]",
       "location": "[parameters('deploymentLocation')]",
+      "tags": "[parameters('nsgTags')]",
       "properties": {
         "securityRules": "[parameters('nsgRules')]"
       }
