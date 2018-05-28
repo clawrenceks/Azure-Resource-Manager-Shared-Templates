@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sqlServerName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "metadata": {
+        "description": "The name of the sql server that the alias will be linked to."
+      }
+    },
+    "dnsAlias": {
+      "type": "string",
+      "metadata": {
+        "description": "The DNS Alias to be created, for example my-alias"
+      }
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "name": "[toLower(concat(parameters('sqlServerName'),'/',parameters('dnsAlias')))]",
+      "type": "Microsoft.Sql/servers/dnsAliases",
+      "apiVersion": "2017-03-01-preview",
+      "properties": {
+        "azureDnsRecord": "[concat(parameters('dnsAlias'),'.database.windows.net')]"
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
