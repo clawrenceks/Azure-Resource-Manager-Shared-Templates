@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sqlServerName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "metadata": {
+        "description": "The name of the sql server that the firewall rule will be linked to."
+      }
+    },
+    "firewallRuleName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "metadata": {
+        "description": "The name of the firewall rule to create."
+      }
+    },
+    "firewallRuleStartIpAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The starting ip address for the firewall rule to be created."
+      }
+    },
+    "firewallRuleEndIpAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The ending ip address for the firewall rule to be created."
+      }
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "name": "[toLower(concat(parameters('sqlServerName'),'/',parameters('firewallRuleName')))]",
+      "type": "Microsoft.Sql/servers/firewallRules",
+      "apiVersion": "2015-05-01-preview",
+      "properties": {
+        "startIpAddress": "[parameters('firewallRuleStartIpAddress')]",
+        "endIpAddress": "[parameters('firewallRuleEndIpAddress')]"
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
