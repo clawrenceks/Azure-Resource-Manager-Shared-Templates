@@ -55,6 +55,10 @@
     "resourceId": {
       "type": "string",
       "value": "[variables('ipResourceId')]"
+    },
+    "dnsSettings": {
+      "type": "object",
+      "value": "[reference(variables('ipResourceId')).dnsSettings]"
     }
   }
 }
