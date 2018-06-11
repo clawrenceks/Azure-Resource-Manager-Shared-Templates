@@ -46,7 +46,8 @@
       "location": "[parameters('deploymentLocation')]",
       "tags": "[parameters('ipTags')]",
       "properties": {
-        "publicIPAllocationMethod": "[parameters('ipAddressAllocationType')]"
+        "publicIPAllocationMethod": "[parameters('ipAddressAllocationType')]",
+        "dnsSettings": {}
       }
     }
   ],
