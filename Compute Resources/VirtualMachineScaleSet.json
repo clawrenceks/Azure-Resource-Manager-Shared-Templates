@@ -122,6 +122,13 @@
         "description": "An array of virtual machine extension objects that should be added to virtual machines in the scale set."
       }
     },
+    "scaleSetTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The tags to apply to the created Virtual Machine Scale Set"
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -222,6 +229,9 @@
           },
           "deploymentLocation": {
             "value": "[parameters('deploymentLocation')]"
+          },
+          "scaleSetTags": {
+            "value": "[parameters('scaleSetTags')]"
           }
         }
       }

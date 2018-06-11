@@ -107,6 +107,13 @@
         "description": "A virtual machine extension array used to configure the virtual machine extensions added to virtual machines in the scale set."
       }
     },
+    "scaleSetTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The tags to apply to the created Virtual Machine Scale Set"
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -124,6 +131,7 @@
       "type": "Microsoft.Compute/virtualMachineScaleSets",
       "name": "[variables('virtualMachineScaleSetName')]",
       "location": "[parameters('deploymentLocation')]",
+      "tags": "[parameters('scaleSetTags')]",
       "apiVersion": "2017-03-30",
       "dependsOn": [
       ],
