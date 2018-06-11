@@ -94,7 +94,7 @@
       "metadata": {
         "description": "An array of secrets objects to be applied to the virtual machine."
       }
-    }
+    },
     "virtualMachineNetworkInterfaceConfiguration": {
       "type": "array",
       "metadata": {
