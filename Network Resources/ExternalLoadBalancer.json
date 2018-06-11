@@ -56,6 +56,13 @@
         "description": "An array of inboundNatRule objects that should be applied to the load balancer"
       }
     },
+    "loadBalancerTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The tags to apply to the created Load Balancer"
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -124,6 +131,9 @@
           },
           "deploymentLocation": {
             "value": "[parameters('deploymentLocation')]"
+          },
+          "loadBalancerTags": {
+            "value": "[parameters('loadBalancerTags')]"
           }
         }
       }

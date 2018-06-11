@@ -52,6 +52,13 @@
         "description": "An array of inboundNatRule objects that should be applied to the load balancer"
       }
     },
+    "loadBalancerTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The tags to apply to the created Load Balancer"
+      }
+    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -69,6 +76,7 @@
       "type": "Microsoft.Network/loadBalancers",
       "name": "[parameters('loadBalancerName')]",
       "location": "[parameters('deploymentLocation')]",
+      "tags": "[parameters('loadBalancerTags')]",
       "dependsOn": [
       ],
       "properties": {
