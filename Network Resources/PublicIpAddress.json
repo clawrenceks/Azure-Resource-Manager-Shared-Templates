@@ -46,8 +46,7 @@
       "location": "[parameters('deploymentLocation')]",
       "tags": "[parameters('ipTags')]",
       "properties": {
-        "publicIPAllocationMethod": "[parameters('ipAddressAllocationType')]",
-        "dnsSettings": {}
+        "publicIPAllocationMethod": "[parameters('ipAddressAllocationType')]"
       }
     }
   ],
@@ -55,10 +54,6 @@
     "resourceId": {
       "type": "string",
       "value": "[variables('ipResourceId')]"
-    },
-    "dnsSettings": {
-      "type": "object",
-      "value": "[reference(variables('ipResourceId')).dnsSettings]"
     }
   }
 }
