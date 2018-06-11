@@ -88,6 +88,13 @@
         "description": "The password for the local administrator account to be created on the virtual machines in the scale set."
       }
     },
+    "virtualMachineSecrets": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "An array of secrets objects to be applied to the virtual machine."
+      }
+    }
     "virtualMachineNetworkInterfaceConfiguration": {
       "type": "array",
       "metadata": {
@@ -139,7 +146,8 @@
           "osProfile": {
             "computerNamePrefix": "[parameters('virtualMachineNamePrefix')]",
             "adminUsername": "[parameters('virtualMachineAdminUsername')]",
-            "adminPassword": "[parameters('virtualMachineAdminPassword')]"
+            "adminPassword": "[parameters('virtualMachineAdminPassword')]",
+            "secrets": "[parameters('virtualMachineSecrets')]"
           },
           "networkProfile": {
             "networkInterfaceConfigurations": "[parameters('virtualMachineNetworkInterfaceConfiguration')]"
