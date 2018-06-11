@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ipAddressName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "The name of the IP Address to be created."
+      }
+    },
+    "ipAddressAllocationType": {
+      "type": "string",
+      "allowedValues": [
+        "Dynamic",
+        "Static"
+      ],
+      "metadata": {
+        "description": "The allocation method for the IP Address, valid options are Dynamic or Static"
+      }
+    },
+    "ipAddressDnsSettings": {
+      "type": "object",
+      "metadata": {
+        "description": "The Dns Settings to be associated with the created IP Address"
+      }
+    },
+    "ipTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The tags to apply to the created IP Address"
+      }
+    },
+    "deploymentLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The Azure location that the resource should be deployed into. Defaults to the location of the resource group."
+      }
+    }
+  },
+  "variables": {
+    "ipResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('ipAddressName'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-03-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('ipAddressName')]",
+      "location": "[parameters('deploymentLocation')]",
+      "tags": "[parameters('ipTags')]",
+      "properties": {
+        "publicIPAllocationMethod": "[parameters('ipAddressAllocationType')]",
+        "dnsSettings": "[parameters('ipAddressDnsSettings')]"
+      }
+    }
+  ],
+  "outputs": {
+    "resourceId": {
+      "type": "string",
+      "value": "[variables('ipResourceId')]"
+    },
+    "dnsSettings": {
+      "type": "object",
+      "value": "[reference(variables('ipResourceId')).dnsSettings]"
+    }
+  }
+}
