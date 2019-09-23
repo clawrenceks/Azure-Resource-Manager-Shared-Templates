@@ -51,7 +51,7 @@
     {
       "name": "[parameters('vNetName')]",
       "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2016-10-01",
+      "apiVersion": "2019-04-01",
       "location": "[parameters('deploymentLocation')]",
       "tags": "[parameters('vNetTags')]",
       "properties": {
