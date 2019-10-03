@@ -36,6 +36,7 @@
     },
     "nicTags": {
       "type": "object",
+      "defaultValue": {},
       "metadata": {
         "description": "The tags to be applied to the created network interface."
       }
